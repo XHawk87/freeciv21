@@ -2,13 +2,97 @@
 .. SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 .. SPDX-FileCopyrightText: XHawk87 <hawk87@hotmail.co.uk>
 
+.. Usage references:
+.. https://longturn.readthedocs.io/en/latest/Contributing/style-guide.html
+.. https://luals.github.io/wiki/definition-files
+.. https://luals.github.io/wiki/annotations/#documenting-types
+.. https://taminomara.github.io/sphinx-lua-ls/index.html#autodoc-directives
+.. https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#rst-primer
+
 .. include:: /global-include.rst
 
 Lua Scripting
 *************
 
-This documentation page is currently under construction. For now, please refer
-to the `Freeciv Lua Reference Manual <https://freeciv.fandom.com/wiki/Lua_reference_manual>`_.
+All Lua code for a ruleset currently goes in the :literal:`game/script.lua`
+file.
+
+.. code-block:: lua
+
+   -- Place Ruins at the location of the destroyed city.
+   function city_destroyed_callback(city, loser, destroyer)
+     city.tile:create_extra("Ruins", nil)
+     -- continue processing
+     return false
+   end
+
+   signal.connect("city_destroyed", "city_destroyed_callback")
+
+In this example, we have a callback handler for the 
+:lua:func:`~Events.city_destroyed` signal that creates a Ruins extra on the
+site of the destroyed city.
+
+Defaults
+========
+
+To avoid having to copy large amounts of standard functionality across to
+every ruleset, there is a :literal:`data/default/default.lua` file containing
+signal handlers that are included automatically.
+
+Signal Handlers
+---------------
+
+.. lua:autoobject::  _deflua_hut_get_gold
+.. lua:autoobject::  _deflua_hut_consolation_prize
+.. lua:autoobject::  _deflua_hut_get_tech
+.. lua:autoobject::  _deflua_hut_get_mercenaries
+.. lua:autoobject::  _deflua_hut_get_city
+.. lua:autoobject::  _deflua_hut_get_barbarians
+.. lua:autoobject::  _deflua_hut_enter_callback
+.. lua:autoobject::  _deflua_hut_frighten_callback
+.. lua:autoobject::  _deflua_make_partisans_callback
+.. lua:autoobject::  _deflua_harmless_disaster_message
+.. lua:autoobject::  _deflua_city_conquer_gold_loot
+
+Disable a Default Signal Handler
+--------------------------------
+
+Disabling a default signal handler is as simple as calling the
+:lua:func:`signal.remove` function with the same signal and handler function
+that created it. E.g. 
+
+.. code-block:: lua
+   signal.remove("city_loot", "_deflua_city_conquer_gold_loot")
+
+This disables gold loot on city capture completely.
+
+Override a Default Signal Handler
+---------------------------------
+
+You can also change the default behaviour for a specific handler by overriding
+the function.
+
+.. code-block:: lua
+   function _deflua_city_conquer_gold_loot(city, looterunit)
+     local loot = 25
+     looterunit.owner:change_gold(loot)
+     notify.event(looterunit.owner, city.tile, E.UNIT_WIN_ATT, 
+       string.format(
+         PL_("Your lootings from %s accumulate to %d gold!",
+             "Your lootings from %s accumulate to %d gold!",
+             loot),
+         city:link_text(), loot
+       )
+     )
+   end
+
+   signal.replace("city_loot", "_deflua_city_conquer_gold_loot")
+
+This just grants a flat 25 gold to the attacker and doesn't take anything from
+the defender.
+
+Alternatively, you can just :lua:func:`signal.remove` the default handler as
+above, and implement your own signal handler using :lua:func:`signal.connect`.
 
 API Reference
 =============
@@ -22,15 +106,181 @@ Modules
    :members:
    :recursive:
 
+.. lua:autoobject:: game
+   :members:
+   :recursive:
+
+.. lua:autoobject:: find
+   :members:
+   :recursive:
+
+.. lua:autoobject:: effects
+   :members:
+   :recursive:
+
+.. lua:autoobject:: direction
+   :members:
+   :recursive:
+
+.. lua:autoobject:: notify
+   :members:
+   :recursive:
+
+.. lua:autoobject:: server
+   :members:
+   :recursive:
+
+.. lua:autoobject:: edit
+   :members:
+   :recursive:
+
+.. lua:autoobject:: signal
+   :members:
+   :recursive:
+
+.. lua:autoobject:: chat
+   :members:
+   :recursive:
+
+.. lua:autoobject:: auth
+   :members:
+   :recursive:
+
+.. lua:autoobject:: fcdb
+   :members:
+   :recursive:
+
 Types
 -----
+
+.. lua:autoobject:: Player
+   :members:
+   :recursive:
+
+.. lua:autoobject:: City
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Unit
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Tile
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Government
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Nation_Type
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Building_Type
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Unit_Type
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Tech_Type
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Terrain
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Disaster
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Achievement
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Connection
+   :members:
+   :recursive:
+
+.. lua:autoobject:: Action
+   :members:
+   :recursive:
 
 .. lua:autoobject:: Nonexistent
    :members:
    :recursive:
 
-Debugging
+Functions
 ---------
 
+Internationalization
+^^^^^^^^^^^^^^^^^^^^
+
+.. lua:autoobject:: _
+.. lua:autoobject:: N_
+.. lua:autoobject:: Q_
+.. lua:autoobject:: PL_
+
+Utilities
+^^^^^^^^^
+
+.. lua:autoobject:: random
+.. lua:autoobject:: fc_version
+.. lua:autoobject:: players_iterate
+.. lua:autoobject:: whole_map_iterate
+
+Debugging
+^^^^^^^^^
+
 .. lua:autoobject:: listenv
+.. lua:autoobject:: _freeciv_state_dump
+.. lua:autoobject:: signal.list
+.. lua:autoobject:: fc_version
+.. lua:autoobject:: _VERSION
+.. lua:autoobject:: assert
+
+Events
+------
+
+.. lua:autoobject:: E
+   :members:
+   :recursive:
+
+.. _script-unit-loss-reasons:
+
+Unit Loss Reasons
+-----------------
+
+.. lua:autoobject:: unit_loss_reasons
+   :members:
+   :recursive:
+
+Lua Built-ins
+-------------
+
+Some Lua builtin functions and modules are also available in Freeciv (some
+functionality is intentionally left out by policy). It is not our intention to
+document Lua builtins here, but just to mention a selection of the useful parts. 
+
+Functions
+^^^^^^^^^
+
+.. lua:autoobject:: pcall
+.. lua:autoobject:: pairs
+.. lua:autoobject:: ipairs
+
+Variables
+^^^^^^^^^
+
+.. lua:autoobject:: _G
+
+Modules
+^^^^^^^
+
+.. lua:autoobject:: math
+.. lua:autoobject:: string
+.. lua:autoobject:: table
 

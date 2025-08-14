@@ -1,7 +1,14 @@
 .. SPDX-License-Identifier: GPL-3.0-or-later
 .. SPDX-FileCopyrightText: James Robertson <jwrober@gmail.com>
+.. SPDX-FileCopyrightText: XHawk87 <hawk87@hotmail.co.uk>
+
+.. Usage references:
+.. https://longturn.readthedocs.io/en/latest/Contributing/style-guide.html
+.. https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#rst-primer
 
 .. include:: /global-include.rst
+
+.. _server-options
 
 Server Options
 **************
@@ -191,6 +198,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
     * ``BZIP2``: Using bzip2 (deprecated).
     * ``XZ``: Using xz.
 
+.. _server-option-conquer-cost:
+
 ``conquercost``
   :strong:`Default Value (Min, Max)`: 0 (0, 100)
 
@@ -242,6 +251,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
     * b = display "best nation" column
 
   The order of characters is not significant, but their capitalization is.
+
+.. _server-option-diplomacy-bulb-cost:
 
 ``diplbulbcost``
   :strong:`Default Value (Min, Max)`: 0 (0, 100)
@@ -367,6 +378,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
   city. This value is multiplied by another factor that comes from the ruleset and is dependent on the size of
   the city.
 
+.. _server-option-free-cost:
+
 ``freecost``
   :strong:`Default Value (Min, Max)`: 0 (0, 100)
 
@@ -408,6 +421,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
     * ``FRACTURE``: Fracture map. Generates maps from a fracture pattern. Tends to place hills and mountains
       along the edges of the continents. If the requested generator is incompatible with other server
       settings, the server may fall back to another generator.
+
+.. _server-option-global-warming:
 
 ``globalwarming``
   :strong:`Default Value`: enabled
@@ -630,6 +645,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
   :strong:`Description`: Maximum size of a city without trade. Cities do not produce any trade at all unless
   their size is larger than this amount. The produced trade increases gradually for cities larger than
   ``notradesize`` and smaller than ``fulltradesize``. See also ``fulltradesize``.
+
+.. _server-option-nuclear-winter:
 
 ``nuclearwinter``
   :strong:`Default Value`: enabled
@@ -919,6 +936,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
   :strong:`Description`: Amount of hills or mountains on the map. Small values give flat maps, while higher
   values give a steeper map with more hills and mountains.
 
+.. _server-option-team-pooled-research:
+
 ``team_pooled_research``
     :strong:`Default Value`: enabled
 
@@ -1097,6 +1116,8 @@ To place a setting value on any of these settings use the ``/set <option-name> <
 
   :strong:`Description`: Technology trading via treaty. If turned off, trading technologies in the diplomacy
   dialog is not allowed.
+
+.. _server-option-trait-distribution:
 
 ``traitdistribution``
   :strong:`Default Value`: ``FIXED``

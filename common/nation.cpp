@@ -28,7 +28,7 @@
 #include "unit.h"
 
 // Qt
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstddef> // size_t

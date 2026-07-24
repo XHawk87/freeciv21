@@ -26,7 +26,7 @@
 #include "tile.h"
 
 // Qt
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <vector> // std:vector

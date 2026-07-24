@@ -45,7 +45,7 @@
 // Qt
 #include <QByteArrayAlgorithms> // qstrlen, qstrdup, qstrncpy
 #include <QChar>
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstring> // str*, mem*

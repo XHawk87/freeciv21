@@ -60,7 +60,7 @@
 #include <QtConfig>              // QT_VERSION_STR
 #include <QtContainerFwd>        // QVector<QString>
 #include <QtGlobal>              // qUtf8Printable
-#include <QtLogging>             // qDebug, qWarning, qCricital, etc
+#include <QtLogging>             // qDebug, qWarning, qCritical, etc
 #include <QtPreprocessorSupport> // Q_UNUSED
 #include <QtVersion>             // qVersion
 

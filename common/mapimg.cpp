@@ -35,7 +35,7 @@
 #include <QStringLiteral>
 #include <Qt>                    // Qt::*
 #include <QtContainerFwd>        // QStringList = QList<QString>
-#include <QtLogging>             // qDebug, qWarning, qCricital, etc
+#include <QtLogging>             // qDebug, qWarning, qCritical, etc
 #include <QtPreprocessorSupport> // Q_UNUSED
 
 // std

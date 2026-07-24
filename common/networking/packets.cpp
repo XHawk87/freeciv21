@@ -27,7 +27,7 @@
 #include <QScopedArrayPointer>
 #include <QString>
 #include <QtContainerFwd>        // QVector<QString>
-#include <QtLogging>             // qDebug, qWarning, qCricital, etc
+#include <QtLogging>             // qDebug, qWarning, qCritical, etc
 #include <QtPreprocessorSupport> // Q_UNUSED
 
 // std

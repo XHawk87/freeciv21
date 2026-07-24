@@ -41,7 +41,7 @@
 #include <QString>
 #include <QStringLiteral>
 #include <Qt>        // Qt::*
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstring> // str*, mem*

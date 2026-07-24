@@ -29,7 +29,7 @@
 #include <QDebug>
 #include <QHash>
 #include <QString>
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstddef>

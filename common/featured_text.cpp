@@ -27,7 +27,7 @@
 #include <QLatin1String>
 #include <QString>
 #include <QStringLiteral>
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstdarg> // va_*

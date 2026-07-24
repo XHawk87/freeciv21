@@ -40,7 +40,7 @@ extern "C" {
 #include <QStringLiteral>
 #include <QtContainerFwd> // QVector<QString>, QStringList = QList<QString>
 #include <QtGlobal>       // qUtf8Printable
-#include <QtLogging>      // qDebug, qWarning, qCricital
+#include <QtLogging>      // qDebug, qWarning, qCritical
 #include <QtPreprocessorSupport> // Q_UNUSED
 #include <QtResource>            // Q_INIT_RESOURCE, Q_CLEANUP_RESOURCE
 

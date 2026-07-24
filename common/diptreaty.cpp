@@ -17,7 +17,7 @@
 #include "tech.h"
 
 // Qt
-#include <QtLogging>             // qDebug, qWarning, qCricital, etc
+#include <QtLogging>             // qDebug, qWarning, qCritical, etc
 #include <QtPreprocessorSupport> // Q_UNUSED
 
 static struct clause_info clause_infos[CLAUSE_COUNT];

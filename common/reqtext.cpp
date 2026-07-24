@@ -34,7 +34,7 @@
 // Qt
 #include <QString>
 #include <QtContainerFwd> // QVector<QString>
-#include <QtLogging>      // qDebug, qWarning, qCricital, etc
+#include <QtLogging>      // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstddef> // size_t

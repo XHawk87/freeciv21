@@ -162,7 +162,7 @@
 #include <QString>
 #include <QStringLiteral>
 #include <QtContainerFwd> // QVector<QString>
-#include <QtLogging>      // qDebug, qWarning, qCricital, etc
+#include <QtLogging>      // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstdarg> // va_*

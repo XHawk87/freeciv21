@@ -18,7 +18,7 @@
 
 // Qt
 #include <QStringLiteral>
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 struct team_slot {
   struct team *team;

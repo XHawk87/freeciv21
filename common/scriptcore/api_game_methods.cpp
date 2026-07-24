@@ -45,10 +45,10 @@ extern "C" {
 #include "unittype.h"
 
 // Qt
-#include <QLoggingCategory> // qCDebug, qCWarning, qCCricital
+#include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
 #include <QString>
 #include <QtGlobal>              // qUtf8Printable
-#include <QtLogging>             // qDebug, qWarning, qCricital
+#include <QtLogging>             // qDebug, qWarning, qCritical
 #include <QtPreprocessorSupport> // Q_UNUSED
 
 // self

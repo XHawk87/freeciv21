@@ -44,7 +44,7 @@
 // Qt
 #include <QString>
 #include <QStringLiteral>
-#include <QtLogging>             // qDebug, qWarning, qCricital, etc
+#include <QtLogging>             // qDebug, qWarning, qCritical, etc
 #include <QtPreprocessorSupport> // Q_UNUSED
 
 // std

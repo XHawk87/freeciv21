@@ -27,7 +27,7 @@
 #include <QByteArray>
 #include <QByteArrayAlgorithms> // qstrlen, qstrdup, qstrncpy
 #include <QtEndian>
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstddef> // std:byte

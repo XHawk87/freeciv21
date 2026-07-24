@@ -30,7 +30,7 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QtGlobal>  // qUtf8Printable
-#include <QtLogging> // qDebug, qWarning, qCricital, etc
+#include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 // std
 #include <cstdlib> // EXIT_FAILURE, free, at_quick_exit

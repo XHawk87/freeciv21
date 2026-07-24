@@ -27,7 +27,7 @@
 #include <Qt>                     // Qt::SkipEmptyParts
 #include <QtContainerFwd>         // QStringList = QList<QString>
 #include <QtEnvironmentVariables> // qEnvironmentVariable*
-#include <QtLogging>              // qDebug, qWarning, qCricital, etc
+#include <QtLogging>              // qDebug, qWarning, qCritical, etc
 
 // i18n dependency
 #ifdef FREECIV_ENABLE_NLS

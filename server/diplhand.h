@@ -42,4 +42,12 @@ void send_diplomatic_meetings(struct connection *dest);
 void cancel_all_meetings(struct player *pplayer);
 void reject_all_treaties(struct player *pplayer);
 
+void handle_diplomacy_accept_treaty_req(struct player *pplayer,
+                                        int counterpart);
+void handle_diplomacy_init_meeting_req(struct player *pplayer,
+                                       int counterpart);
+void handle_diplomacy_create_clause_req(struct player *pplayer,
+                                        int counterpart, int giver,
+                                        enum clause_type type, int value);
+
 struct treaty_list *get_all_treaties();

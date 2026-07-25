@@ -20,6 +20,15 @@ struct rgbcolor;
 struct section_file;
 struct unit_list;
 
+void handle_player_change_government(struct player *pplayer,
+                                     Government_type_id government);
+void handle_diplomacy_cancel_pact(struct player *pplayer,
+                                  int other_player_id,
+                                  enum clause_type clause);
+void handle_diplomacy_cancel_pact_explicit(struct player *pplayer,
+                                           int other_player_id,
+                                           enum clause_type clause,
+                                           bool protect_alliances);
 struct player *server_create_player(int player_id, const char *ai_tname,
                                     struct rgbcolor *prgbcolor,
                                     bool allow_ai_type_fallbacking);

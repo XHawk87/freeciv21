@@ -24,14 +24,6 @@
 #include "unitlist.h"
 #include "unittype.h"
 
-// server
-#include "advbuilding.h"
-#include "advchoice.h"
-#include "advdata.h"
-#include "citytools.h"
-#include "infracache.h"
-#include "srv_log.h"
-
 // ai
 #include "aidata.h"
 #include "ailog.h"
@@ -41,6 +33,14 @@
 #include "aitraits.h"
 #include "daicity.h"
 #include "handicaps.h"
+
+// server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advdata.h"
+#include "citytools.h"
+#include "infracache.h"
+#include "srv_log.h"
 
 /**
    Evaluate the need for units (like caravans) that aid wonder construction.

@@ -11,14 +11,12 @@
 #include "unit.h"
 
 // ai
+#include "aiunit.h"
 #include "classicai.h"
 
 // server
 #include "advchoice.h"
 #include "advgoto.h"
-
-// FIXME - supposed to be with ai
-#include "aiunit.h"
 
 class PFPath;
 struct pf_parameter;

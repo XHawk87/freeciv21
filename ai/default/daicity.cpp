@@ -32,20 +32,6 @@
 #include "unitlist.h"
 #include "unittype.h"
 
-// server
-#include "advbuilding.h"
-#include "advchoice.h"
-#include "advdata.h"
-#include "autosettlers.h"
-#include "cityhand.h"
-#include "citytools.h"
-#include "cityturn.h"
-#include "infracache.h"
-#include "notify.h"
-#include "plrhand.h"
-#include "srv_log.h"
-#include "unithand.h"
-
 // ai
 #include "aidata.h"
 #include "aihand.h"
@@ -60,6 +46,20 @@
 #include "daimilitary.h"
 #include "difficulty.h"
 #include "handicaps.h"
+
+// server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advdata.h"
+#include "autosettlers.h"
+#include "cityhand.h"
+#include "citytools.h"
+#include "cityturn.h"
+#include "infracache.h"
+#include "notify.h"
+#include "plrhand.h"
+#include "srv_log.h"
+#include "unithand.h"
 
 // std
 #include <cstring>

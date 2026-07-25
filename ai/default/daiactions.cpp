@@ -24,13 +24,13 @@
 #include "unit.h"
 #include "unittype.h"
 
+// ai
+#include "aihand.h"
+
 // server
 #include "cityturn.h"
 #include "diplomats.h"
 #include "srv_log.h"
-
-// ai
-#include "aihand.h"
 
 #define LOG_DIPLOMAT LOG_DEBUG
 

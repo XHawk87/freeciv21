@@ -58,6 +58,7 @@
 
 // Qt
 #include <QtLogging> // qDebug, qWarning, qCritical
+
 // std
 #include <cstddef> // size_t
 

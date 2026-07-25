@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <cstring>
+// self
+#include "daimilitary.h"
 
 // utility
 #include "log.h"
+#include "shared.h"
 
 // common
 #include "city.h"
@@ -12,49 +14,56 @@
 #include "effects.h"
 #include "fc_types.h"
 #include "game.h"
-#include "government.h"
+#include "improvement.h"
 #include "map.h"
 #include "movement.h"
+#include "path_finding.h"
+#include "pf_tools.h"
+#include "player.h"
 #include "research.h"
 #include "specialist.h"
+#include "tech.h"
+#include "terrain.h"
+#include "tile.h"
+#include "unit.h"
 #include "unitlist.h"
 #include "unittype.h"
-
-/* common/aicore */
-#include "pf_tools.h"
-
-// server
-#include "srv_log.h"
-#include "srv_main.h"
-
-/* server/advisors */
-#include "advbuilding.h"
-#include "advchoice.h"
-#include "advdata.h"
-#include "advtools.h"
-#include "infracache.h" // adv_city
+#include "world_object.h"
 
 // ai
-#include "aitraits.h"
-#include "difficulty.h"
-#include "handicaps.h"
-
-/* ai/default */
 #include "aiair.h"
 #include "aidata.h"
 #include "aidiplomat.h"
 #include "aiferry.h"
-#include "aihand.h"
 #include "aihunt.h"
 #include "ailog.h"
 #include "aiparatrooper.h"
 #include "aiplayer.h"
 #include "aitech.h"
 #include "aitools.h"
+#include "aitraits.h"
 #include "aiunit.h"
+#include "classicai.h"
 #include "daicity.h"
 #include "daieffects.h"
-#include "daimilitary.h"
+#include "difficulty.h"
+#include "handicaps.h"
+
+// server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advdata.h"
+#include "advgoto.h"
+#include "advtools.h"
+#include "infracache.h"
+#include "srv_log.h"
+#include "srv_main.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
+
+// std
+#include <cstring>
 
 static int assess_danger(struct ai_type *ait, struct city *pcity,
                          const struct civ_map *dmap,

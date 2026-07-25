@@ -1,54 +1,48 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- __    __          part of Freeciv21. Freeciv21 is free software: you can
-/ \\..// \    redistribute it and/or modify it under the terms of the GNU
-  ( oo )        General Public License  as published by the Free Software
-   \__/         Foundation, either version 3 of the License,  or (at your
-                      option) any later version. You should have received
-    a copy of the GNU General Public License along with Freeciv21. If not,
-                  see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aiferry.h"
 
 // utility
 #include "log.h"
+#include "shared.h"
 
 // common
-#include "actions.h"
+#include "city.h"
+#include "fc_types.h"
 #include "game.h"
 #include "map.h"
 #include "movement.h"
-#include "unit.h"
-#include "unitlist.h"
-
-// aicore
 #include "path_finding.h"
 #include "pf_tools.h"
-
-/* server/advisors */
-#include "advgoto.h"
-#include "autoexplorer.h"
-
-// server
-#include "hand_gen.h"
-#include "srv_log.h"
-#include "unithand.h"
-#include "unittools.h"
-
-/* server/advisors */
-#include "advdata.h"
+#include "player.h"
+#include "terrain.h"
+#include "tile.h"
+#include "unit.h"
+#include "unitlist.h"
+#include "unittype.h"
 
 // ai
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "aiguard.h"
 #include "ailog.h"
 #include "aiplayer.h"
 #include "aitools.h"
 #include "aiunit.h"
+#include "daicity.h"
+#include "handicaps.h"
 
-#include "aiferry.h"
+// server
+#include "advgoto.h"
+#include "autoexplorer.h"
+#include "hand_gen.h"
+#include "srv_log.h"
+#include "unithand.h"
+#include "unittools.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
 
 // =================== constants with special meaning ===================
 

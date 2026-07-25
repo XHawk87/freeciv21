@@ -1,47 +1,43 @@
-/*
- Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors. This file is
-                   part of Freeciv21. Freeciv21 is free software: you can
-    ^oo^      redistribute it and/or modify it under the terms of the GNU
-    (..)        General Public License  as published by the Free Software
-   ()  ()       Foundation, either version 3 of the License,  or (at your
-   ()__()             option) any later version. You should have received
-    a copy of the GNU General Public License along with Freeciv21. If not,
-                  see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aiair.h"
 
 // utility
 #include "log.h"
 
 // common
 #include "actions.h"
+#include "city.h"
 #include "combat.h"
+#include "fc_types.h"
 #include "game.h"
 #include "map.h"
 #include "movement.h"
+#include "path_finder.h"
+#include "path_finding.h"
 #include "pf_tools.h"
 #include "player.h"
+#include "tile.h"
 #include "unit.h"
-
-// server
-#include "maphand.h"
-#include "srv_log.h"
-#include "unithand.h"
-#include "unittools.h"
-
-/* server/advisors */
-#include "advbuilding.h"
-#include "advgoto.h"
+#include "unittype.h"
 
 // ai
-#include "handicaps.h"
-
-/* ai/default */
 #include "ailog.h"
 #include "aiplayer.h"
 #include "aitools.h"
 #include "aiunit.h"
+#include "daicity.h"
+#include "handicaps.h"
 
-#include "aiair.h"
+// server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advgoto.h"
+#include "maphand.h"
+#include "srv_log.h"
+#include "unithand.h"
 
 class PFPath;
 /**

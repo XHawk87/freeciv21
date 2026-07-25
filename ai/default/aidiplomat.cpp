@@ -1,55 +1,32 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- part of Freeciv21. Freeciv21 is free software: you can redistribute it
- and/or modify it under the terms of the GNU  General Public License  as
- published by the Free Software Foundation, either version 3 of the
- License,  or (at your option) any later version. You should have received
- a copy of the GNU General Public License along with Freeciv21. If not,
- see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aidiplomat.h"
 
 // utility
-#include "bitvector.h"
 #include "log.h"
 #include "shared.h"
-#include "timing.h"
 
 // common
 #include "actions.h"
 #include "city.h"
-#include "combat.h"
+#include "fc_types.h"
 #include "game.h"
-#include "government.h"
 #include "map.h"
 #include "movement.h"
 #include "nation.h"
-#include "packets.h"
+#include "path_finding.h"
 #include "player.h"
 #include "research.h"
+#include "tech.h"
+#include "tile.h"
 #include "unit.h"
 #include "unitlist.h"
-
-// aicore
-#include "aiactions.h"
-#include "pf_tools.h"
-
-// server
-#include "citytools.h"
-#include "cityturn.h"
-#include "diplomats.h"
-#include "maphand.h"
-#include "srv_log.h"
-#include "unithand.h"
-
-/* server/advisors */
-#include "advbuilding.h"
-#include "advdata.h"
-#include "advgoto.h"
+#include "unittype.h"
 
 // ai
-#include "handicaps.h"
-
-/* ai/default */
+#include "aiactions.h"
 #include "aidata.h"
 #include "aiguard.h"
 #include "aihand.h"
@@ -59,8 +36,19 @@
 #include "aiunit.h"
 #include "daiactions.h"
 #include "daicity.h"
+#include "handicaps.h"
+#include "pf_tools.h"
 
-#include "aidiplomat.h"
+// server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advgoto.h"
+#include "citytools.h"
+#include "cityturn.h"
+#include "diplomats.h"
+#include "maphand.h"
+#include "srv_log.h"
+#include "unithand.h"
 
 #define LOG_DIPLOMAT LOG_DEBUG
 #define LOG_DIPLOMAT_BUILD LOG_DEBUG

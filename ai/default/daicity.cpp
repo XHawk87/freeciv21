@@ -1,62 +1,68 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <cstring>
+// self
+#include "daicity.h"
 
 // utility
+#include "fcintl.h"
+#include "log.h"
 #include "rand.h"
-#include "registry.h"
 #include "registry_ini.h"
+#include "shared.h"
 
 // common
 #include "actions.h"
+#include "city.h"
+#include "effects.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
 #include "government.h"
+#include "improvement.h"
+#include "player.h"
+#include "requirements.h"
 #include "research.h"
 #include "specialist.h"
+#include "tech.h"
+#include "terrain.h"
+#include "tile.h"
+#include "traderoutes.h"
+#include "unit.h"
+#include "unitlist.h"
+#include "unittype.h"
 
 // server
+#include "advbuilding.h"
+#include "advchoice.h"
+#include "advdata.h"
+#include "autosettlers.h"
 #include "cityhand.h"
 #include "citytools.h"
 #include "cityturn.h"
+#include "infracache.h"
 #include "notify.h"
 #include "plrhand.h"
 #include "srv_log.h"
 #include "unithand.h"
-/* server/advisors */
-#include "advbuilding.h"
-#include "advdata.h"
-#include "autosettlers.h"
-#include "infracache.h"
 
 // ai
-#include "aitraits.h"
-#include "difficulty.h"
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "aihand.h"
 #include "aiplayer.h"
 #include "aisettler.h"
 #include "aitools.h"
+#include "aitraits.h"
 #include "aiunit.h"
 #include "daidiplomacy.h"
 #include "daidomestic.h"
 #include "daieffects.h"
 #include "daimilitary.h"
+#include "difficulty.h"
+#include "handicaps.h"
 
-#include "daicity.h"
+// std
+#include <cstring>
 
 #define LOG_BUY LOG_DEBUG
 #define LOG_EMERGENCY LOG_VERBOSE

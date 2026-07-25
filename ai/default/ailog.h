@@ -1,22 +1,24 @@
-/**************************************************************************
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- part of Freeciv21. Freeciv21 is free software: you can redistribute it
- and/or modify it under the terms of the GNU  General Public License  as
- published by the Free Software Foundation, either version 3 of the
- License,  or (at your option) any later version. You should have received
- a copy of the GNU General Public License along with Freeciv21. If not,
- see https://www.gnu.org/licenses/.
-**************************************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
 #pragma once
 
 // utility
 #include "support.h"
 
 // common
+#include "city.h"
 #include "tech.h"
+#include "unit.h"
+
+// ai
+#include "classicai.h"
 
 // Qt
 #include <QLoggingCategory>
+#include <QString>
+#include <QStringLiteral>
+#include <QtGlobal> // qUtf8Printable
 
 Q_DECLARE_LOGGING_CATEGORY(ai_category)
 

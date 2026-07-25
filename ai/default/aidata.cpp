@@ -1,32 +1,33 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- part of Freeciv21. Freeciv21 is free software: you can redistribute it
- and/or modify it under the terms of the GNU  General Public License  as
- published by the Free Software Foundation, either version 3 of the
- License,  or (at your option) any later version. You should have received
- a copy of the GNU General Public License along with Freeciv21. If not,
- see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aidata.h"
+
+// utility
+#include "log.h"
+#include "shared.h"
 
 // common
+#include "city.h"
+#include "effects.h"
 #include "fc_types.h"
 #include "game.h"
 #include "government.h"
 #include "multipliers.h"
+#include "player.h"
+#include "requirements.h"
 #include "research.h"
+#include "tech.h"
+#include "terrain.h"
 #include "tile.h"
+#include "unit.h"
+#include "unit_utils.h"
+#include "unitlist.h"
+#include "unittype.h"
 
-// aicore
+// ai
 #include "aiactions.h"
-
-// server
-#include "cityturn.h"
-#include "plrhand.h"
-
-/* server/advisors */
-#include "advdata.h"
-
-/* ai/default */
 #include "aiferry.h"
 #include "aiplayer.h"
 #include "aisettler.h"
@@ -35,7 +36,11 @@
 #include "daidiplomacy.h"
 #include "daieffects.h"
 
-#include "aidata.h"
+// server
+#include "advdata.h"
+#include "advtools.h"
+#include "cityturn.h"
+#include "plrhand.h"
 
 static void dai_diplomacy_new(struct ai_type *ait, const struct player *plr1,
                               const struct player *plr2);

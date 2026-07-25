@@ -1,52 +1,34 @@
-/*
-_   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
- \  |    This file is part of Freeciv21. Freeciv21 is free software: you
-  \_|        can redistribute it and/or modify it under the terms of the
- .' '.              GNU General Public License  as published by the Free
- :O O:             Software Foundation, either version 3 of the License,
- '/ \'           or (at your option) any later version. You should have
-  :X:      received a copy of the GNU General Public License along with
-  :X:              Freeciv21. If not, see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <QHash>
+// self
+#include "aisettler.h"
 
 // utility
-#include "support.h"
-#include "timing.h"
+#include "log.h"
+#include "shared.h"
 
 // common
 #include "actions.h"
 #include "city.h"
+#include "citymap.h"
+#include "explanation.h"
+#include "extras.h"
+#include "fc_types.h"
 #include "game.h"
 #include "government.h"
 #include "map.h"
-#include "packets.h"
+#include "path_finding.h"
+#include "pf_tools.h"
 #include "player.h"
+#include "tech.h"
+#include "terrain.h"
+#include "tile.h"
+#include "unit.h"
+#include "unittype.h"
 #include "workertask.h"
 
-/* common/aicore */
-#include "citymap.h"
-#include "pf_tools.h"
-
-// server
-#include "citytools.h"
-#include "maphand.h"
-#include "srv_log.h"
-#include "unithand.h"
-#include "unittools.h"
-
-/* server/advisors */
-#include "advdata.h"
-#include "advgoto.h"
-#include "advtools.h"
-#include "autosettlers.h"
-#include "infracache.h"
-
 // ai
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "aiferry.h"
 #include "ailog.h"
@@ -54,8 +36,29 @@ _   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
 #include "aitools.h"
 #include "aiunit.h"
 #include "daicity.h"
+#include "handicaps.h"
 
-#include "aisettler.h"
+// server
+#include "advchoice.h"
+#include "advdata.h"
+#include "advgoto.h"
+#include "advtools.h"
+#include "autosettlers.h"
+#include "citytools.h"
+#include "infracache.h"
+#include "maphand.h"
+#include "srv_log.h"
+#include "unithand.h"
+#include "unittools.h"
+
+// Qt
+#include <QHash>
+#include <QScopedArrayPointer>
+#include <QtLogging> // qDebug, qWarning, qCritical
+
+// std
+#include <memory>  // std::unique_ptr
+#include <utility> // std::as_const
 
 // COMMENTS
 /*

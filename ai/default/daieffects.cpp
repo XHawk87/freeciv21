@@ -1,39 +1,48 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- part of Freeciv21. Freeciv21 is free software: you can redistribute it
- and/or modify it under the terms of the GNU  General Public License  as
- published by the Free Software Foundation, either version 3 of the
- License,  or (at your option) any later version. You should have received
- a copy of the GNU General Public License along with Freeciv21. If not,
- see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "daieffects.h"
+
+// utility
+#include "log.h"
+#include "shared.h"
+#include "support.h"
 
 // common
 #include "city.h"
 #include "effects.h"
+#include "fc_types.h"
 #include "game.h"
 #include "government.h"
+#include "improvement.h"
 #include "map.h"
 #include "movement.h"
-#include "multipliers.h"
 #include "player.h"
+#include "requirements.h"
 #include "research.h"
 #include "specialist.h"
+#include "terrain.h"
+#include "tile.h"
 #include "traderoutes.h"
+#include "unitlist.h"
+#include "unittype.h"
 #include "victory.h"
-
-// server
-#include "plrhand.h"
-
-/* server/advisors */
-#include "advdata.h"
-#include "advtools.h"
 
 // ai
 #include "aitraits.h"
 #include "handicaps.h"
 
-#include "daieffects.h"
+// server
+#include "advdata.h"
+#include "advtools.h"
+#include "plrhand.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
+
+// std
+#include <cmath>
 
 /**
    Return the number of "luxury specialists".  This is the number of

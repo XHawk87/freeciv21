@@ -1,15 +1,8 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aitools.h"
 
 // utility
 #include "bitvector.h"
@@ -19,39 +12,26 @@
 // common
 #include "actions.h"
 #include "city.h"
+#include "citymap.h"
 #include "combat.h"
+#include "effects.h"
+#include "extras.h"
+#include "fc_types.h"
 #include "game.h"
 #include "government.h"
+#include "improvement.h"
 #include "map.h"
 #include "movement.h"
 #include "nation.h"
-#include "packets.h"
+#include "path_finding.h"
+#include "pf_tools.h"
 #include "player.h"
+#include "tile.h"
 #include "unit.h"
 #include "unitlist.h"
-
-/* common/aicore */
-#include "citymap.h"
-#include "pf_tools.h"
-
-// server
-#include "cityturn.h"
-#include "maphand.h"
-#include "score.h"
-#include "srv_log.h"
-#include "unithand.h"
-#include "unittools.h"
-
-/* server/advisors */
-#include "advdata.h"
-#include "advgoto.h"
-#include "advtools.h"
-#include "infracache.h" // adv_city
+#include "unittype.h"
 
 // ai
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "aiferry.h"
 #include "aiguard.h"
@@ -59,9 +39,27 @@
 #include "aiplayer.h"
 #include "aitech.h"
 #include "aiunit.h"
+#include "daicity.h"
 #include "daimilitary.h"
+#include "handicaps.h"
 
-#include "aitools.h"
+// server
+#include "advchoice.h"
+#include "advdata.h"
+#include "advgoto.h"
+#include "advtools.h"
+#include "cityturn.h"
+#include "infracache.h"
+#include "plrhand.h"
+#include "score.h"
+#include "srv_log.h"
+#include "unithand.h"
+#include "unittools.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
+// std
+#include <cstddef> // size_t
 
 class PFPath;
 /**

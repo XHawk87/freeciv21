@@ -1,28 +1,34 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- part of Freeciv21. Freeciv21 is free software: you can redistribute it
- and/or modify it under the terms of the GNU  General Public License  as
- published by the Free Software Foundation, either version 3 of the
- License,  or (at your option) any later version. You should have received
- a copy of the GNU General Public License along with Freeciv21. If not,
- see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "ailog.h"
+
+// utility
+#include "support.h"
 
 // common
+#include "city.h"
+#include "fc_types.h"
+#include "game.h"
 #include "map.h"
 #include "nation.h"
 #include "player.h"
 #include "research.h"
-// server
-#include "notify.h"
+#include "tech.h"
+#include "tile.h"
+#include "unit.h"
+#include "unittype.h"
 
-/* ai/default */
+// ai
 #include "aidata.h"
 #include "aiplayer.h"
 #include "aiunit.h"
 #include "daicity.h"
 
-#include "ailog.h"
+// Qt
+#include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
+#include <QString>
 
 Q_LOGGING_CATEGORY(ai_category, "freeciv.ai")
 

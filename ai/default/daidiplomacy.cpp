@@ -1,61 +1,62 @@
-/*
-Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- /\/\             part of Freeciv21. Freeciv21 is free software: you can
-   \_\  _..._    redistribute it and/or modify it under the terms of the
-   (" )(_..._)      GNU General Public License  as published by the Free
-    ^^  // \\      Software Foundation, either version 3 of the License,
-                  or (at your option) any later version. You should have
-received a copy of the GNU General Public License along with Freeciv21.
-                              If not, see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <cstdarg>
-#include <cstring>
+// self
+#include "daidiplomacy.h"
+
+// generated
+#include "packets_gen.h"
 
 // utility
 #include "fcintl.h"
 #include "log.h"
 #include "rand.h"
 #include "shared.h"
-#include "support.h"
 
 // common
 #include "actions.h"
+#include "ai.h"
 #include "aisupport.h"
 #include "city.h"
 #include "diptreaty.h"
-#include "events.h"
+#include "effects.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
-#include "nation.h"
-#include "packets.h"
+#include "improvement.h"
+#include "map.h"
 #include "player.h"
 #include "research.h"
 #include "spaceship.h"
 #include "tech.h"
+#include "unit.h"
 #include "unitlist.h"
-
-// server
-#include "diplhand.h"
-#include "maphand.h"
-#include "notify.h"
-
-/* server/advisors */
-#include "advdata.h"
-#include "advtools.h"
+#include "unittype.h"
 
 // ai
-#include "aitraits.h"
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "ailog.h"
 #include "aiplayer.h"
-#include "aitools.h"
+#include "aitraits.h"
 #include "aiunit.h"
 #include "daicity.h"
+#include "handicaps.h"
 
-#include "daidiplomacy.h"
+// server
+#include "advdata.h"
+#include "advtools.h"
+#include "diplhand.h"
+#include "maphand.h"
+#include "notify.h"
+#include "plrhand.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
+
+// std
+#include <cmath>
+#include <cstdarg>
+#include <cstring>
 
 #define LOG_DIPL2 LOG_DEBUG
 

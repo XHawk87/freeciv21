@@ -1,29 +1,28 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <QBitArray>
+// self
+#include "difficulty.h"
+
 // utility
 #include "astring.h"
 #include "fcintl.h"
+#include "log.h"
 #include "rand.h"
+#include "support.h"
 
 // common
+#include "fc_types.h"
 #include "player.h"
 
 // ai
 #include "handicaps.h"
 
-#include "difficulty.h"
+// Qt
+#include <QBitArray>
+#include <QByteArrayAlgorithms> // qstr*
+#include <QString>
+#include <QtGlobal> // qUtf8Printable
 
 static QBitArray *handicap_of_skill_level(enum ai_level level);
 static int fuzzy_of_skill_level(enum ai_level level);

@@ -1,15 +1,8 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "aihand.h"
 
 // utility
 #include "distribute.h"
@@ -19,33 +12,22 @@
 
 // common
 #include "city.h"
+#include "cm.h"
+#include "effects.h"
+#include "fc_types.h"
 #include "game.h"
 #include "government.h"
 #include "hand_gen.h"
 #include "nation.h"
 #include "player.h"
 #include "research.h"
+#include "spaceship.h"
+#include "tech.h"
 #include "unit.h"
+#include "unitlist.h"
 #include "victory.h"
 
-/* common/aicore */
-#include "cm.h"
-
-// server
-#include "cityturn.h"
-#include "plrhand.h"
-#include "sernet.h"
-#include "spacerace.h"
-#include "srv_log.h"
-
-/* server/advisors */
-#include "advdata.h"
-#include "advspace.h"
-
 // ai
-#include "handicaps.h"
-
-/* ai/default */
 #include "aidata.h"
 #include "ailog.h"
 #include "aiplayer.h"
@@ -55,8 +37,19 @@
 #include "daicity.h"
 #include "daidiplomacy.h"
 #include "daimilitary.h"
+#include "handicaps.h"
 
-#include "aihand.h"
+// server
+#include "advdata.h"
+#include "advspace.h"
+#include "cityturn.h"
+#include "plrhand.h"
+#include "sernet.h"
+#include "spacerace.h"
+#include "srv_log.h"
+
+// Qt
+#include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
 
 /**
   A man builds a city

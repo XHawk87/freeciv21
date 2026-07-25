@@ -4,6 +4,9 @@
 // self
 #include "aihand.h"
 
+// generated
+#include "hand_gen.h"
+
 // utility
 #include "distribute.h"
 #include "log.h"

@@ -4,6 +4,9 @@
 // self
 #include "aiferry.h"
 
+// generated
+#include "hand_gen.h"
+
 // utility
 #include "log.h"
 #include "shared.h"
@@ -36,7 +39,6 @@
 // server
 #include "advgoto.h"
 #include "autoexplorer.h"
-#include "hand_gen.h"
 #include "srv_log.h"
 #include "unithand.h"
 #include "unittools.h"

@@ -5,6 +5,7 @@
 #include "daidiplomacy.h"
 
 // generated
+#include "hand_gen.h"
 #include "packets_gen.h"
 
 // utility
@@ -48,7 +49,6 @@
 #include "diplhand.h"
 #include "maphand.h"
 #include "notify.h"
-#include "plrhand.h"
 
 // Qt
 #include <QtLogging> // qDebug, qWarning, qCritical

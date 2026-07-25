@@ -4,6 +4,9 @@
 // self
 #include "aitools.h"
 
+// generated
+#include "hand_gen.h"
+
 // utility
 #include "bitvector.h"
 #include "log.h"
@@ -50,7 +53,6 @@
 #include "advtools.h"
 #include "cityturn.h"
 #include "infracache.h"
-#include "plrhand.h"
 #include "score.h"
 #include "srv_log.h"
 #include "unithand.h"

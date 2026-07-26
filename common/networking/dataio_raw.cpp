@@ -490,7 +490,9 @@ bool dio_get(QByteArrayView &din, struct requirement &preq)
   preq = req_from_values(type, range, survives, present, quiet, value);
   if (preq.source.kind == universals_n_invalid()) {
     // Keep bad requirements but make sure we never touch them.
-    qWarning() << "The server sent an invalid or unknown requirement.";
+    qWarning() << "The server sent an invalid or unknown requirement with "
+                  "type, range, value:"
+               << type << range << value;
     preq.source.kind = VUT_NONE;
   }
 

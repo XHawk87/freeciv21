@@ -44,6 +44,10 @@ void layer_abstract_activities::initialize_extra(const extra_type *extra,
                                                  const QString &tag,
                                                  extrastyle_id style)
 {
+  // This function is not called for extras with style=none
+  if (extra->id > m_extra_activities.size()) {
+    m_extra_activities.resize(extra->id);
+  }
   fc_assert(extra->id == m_extra_activities.size());
 
   if (!fc_strcasecmp(extra->activity_gfx, "none")) {

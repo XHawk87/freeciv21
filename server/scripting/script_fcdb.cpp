@@ -257,7 +257,7 @@ void script_fcdb_free()
    Parse and execute the script in str in the lua instance for the freeciv
    database.
  */
-bool script_fcdb_do_string(server_connection *caller, const char *str)
+bool script_fcdb_do_string(connection *caller, const char *str)
 {
   /* Set a log callback function which allows to send the results of the
    * command to the clients. */

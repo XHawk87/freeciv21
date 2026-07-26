@@ -567,7 +567,8 @@ struct universal universal_by_number(const enum universals_n kind,
     break;
   case VUT_UCFLAG:
     source.value.unitclassflag = value;
-    if (source.value.unitclassflag) {
+    if (unit_class_flag_id_is_valid(
+            static_cast<unit_class_flag_id>(source.value.unitclassflag))) {
       return source;
     }
     break;

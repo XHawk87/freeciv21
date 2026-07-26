@@ -1454,7 +1454,7 @@ def write_disclaimer(output: io.TextIOWrapper) -> None:
 
 def write_common_header(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of packets_gen.h to the output stream.
+    Writes the contents of common/packets_gen.h to the output stream.
     """
 
     write_disclaimer(output)
@@ -1472,6 +1472,7 @@ def write_common_header(packets: list[Packet], output: io.TextIOWrapper) -> None
 
 // std
 #include <array>
+#include <cstddef> // std::byte
 
 """
     )
@@ -1498,7 +1499,7 @@ void delta_stats_reset();
 
 def write_common_source(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of packets_gen.cpp to the output stream.
+    Writes the contents of common/packets_gen.cpp to the output stream.
     """
 
     write_disclaimer(output)
@@ -1580,7 +1581,7 @@ static int stats_total_sent;
 
 def write_client_header(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of packhand_gen.h to the output stream.
+    Writes the contents of client/packhand_gen.h to the output stream.
     """
 
     write_disclaimer(output)
@@ -1588,11 +1589,11 @@ def write_client_header(packets: list[Packet], output: io.TextIOWrapper) -> None
         """
 #pragma once
 
-// utility
-#include "shared.h"
+// generated
+#include "packets_gen.h"
 
 // common
-#include "packets.h"
+#include "fc_types.h"
 
 bool client_handle_packet(enum packet_type type, const void *packet);
 
@@ -1615,19 +1616,20 @@ bool client_handle_packet(enum packet_type type, const void *packet);
 
 def write_client_source(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of packhand_gen.cpp to the output stream.
+    Writes the contents of client/packhand_gen.cpp to the output stream.
     """
 
     write_disclaimer(output)
     output.write(
         """
+// self - generated
 #include "packhand_gen.h"
+
+// generated
+#include "packets_gen.h"
 
 // utility
 #include "fc_config.h"
-
-// common
-#include "packets.h"
 
 bool client_handle_packet(enum packet_type type, const void *packet)
 {
@@ -1673,7 +1675,7 @@ bool client_handle_packet(enum packet_type type, const void *packet)
 
 def write_server_header(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of hand_gen.h to the output stream.
+    Writes the contents of server/hand_gen.h to the output stream.
     """
 
     write_disclaimer(output)
@@ -1681,12 +1683,13 @@ def write_server_header(packets: list[Packet], output: io.TextIOWrapper) -> None
         """
 #pragma once
 
-// utility
-#include "shared.h"
+// generated
+#include "packets_gen.h"
 
 // common
+#include "cm.h"
 #include "fc_types.h"
-#include "packets.h"
+#include "unit.h"
 
 struct server_connection;
 
@@ -1729,19 +1732,23 @@ bool server_handle_packet(enum packet_type type, const void *packet,
 
 def write_server_source(packets: list[Packet], output: io.TextIOWrapper) -> None:
     """
-    Writes the contents of hand_gen.cpp to the output stream.
+    Writes the contents of server/hand_gen.cpp to the output stream.
     """
 
     write_disclaimer(output)
     output.write(
         """
+// self - generated
 #include "hand_gen.h"
+
+// generated
+#include "packets_gen.h"
 
 // utility
 #include "fc_config.h"
 
 // common
-#include "packets.h"
+#include "fc_types.h"
 
 bool server_handle_packet(enum packet_type type, const void *packet,
                           player *pplayer, server_connection *pconn)

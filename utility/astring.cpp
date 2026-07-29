@@ -8,8 +8,9 @@
 #include "fcintl.h"
 
 // Qt
+#include <QString>
 #include <QStringLiteral>
-#include <QVector>        // IWYU pragma: keep
+#include <QVector>
 #include <Qt>             // Qt::SkipEmptyParts
 #include <QtContainerFwd> // QVector<QString>, QStringList = QList<QString>
 

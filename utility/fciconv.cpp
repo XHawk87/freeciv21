@@ -45,8 +45,10 @@
 // self
 #include "fciconv.h"
 
+// generated
+#include <fc_config.h>
+
 // utility
-#include "fc_config.h"
 #include "fcintl.h"
 
 // dependency

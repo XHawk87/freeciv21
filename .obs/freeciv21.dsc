@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Louis Moureaux <m_louis30@yahoo.com>
 # SPDX-FileCopyrightText: James Robertson <jwrober@gmail.com>
 #
-# DEB source cotrol file for freeciv21 to run on Open Build Service (OBS)
+# DEB source control file for freeciv21 to run on Open Build Service (OBS)
 # Project Home: https://build.opensuse.org/project/show/home:longturn
 #
 Format: 1.0

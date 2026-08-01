@@ -13,11 +13,21 @@ main_workflow:
         target_project: home:louis94_m:freeciv21:PRs
   filters:
     event: pull_request
+rebuild_package:
+  steps:
+    - rebuild_package:
+        project: home:longturn:unstable
+        package: freeciv21
+  filters:
+    event: merge
+    branches:
+      only:
+        - master
 rebuild_master:
   steps:
     - rebuild_package:
-        project: home:louis94_m:freeciv21
-        package: freeciv21-dev
+        project: home:longturn:development
+        package: freeciv21
   filters:
     event: tag_push
     branches:

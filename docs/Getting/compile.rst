@@ -351,7 +351,7 @@ ReadTheDocs Theme
 
 If you are running Debian Linux, the base program is installed by the instructions in the
 `Debian Linux Packages`_ section above. The documentation is not built by default from the steps in
-`Compiling/Building`_ above. To generate a local copy of the documentation, issue this command:
+`Compiling / Building`_ above. To generate a local copy of the documentation, issue this command:
 
 .. code-block:: sh
 

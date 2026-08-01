@@ -18,10 +18,29 @@ If you are an Arch Linux user, you can find Freeciv21 in the AUR at https://aur.
 .. note::
   We are in the process of moving to openSUSE Build Service (OBS) for our native Linux packages. The above
   mentioned GitHub releases page will eventually lose the Debian package in favor of OBS. See steps below
-  to add our OBS repository to your system. We currently support the *Stable* version of Freeciv21 in OBS.
-  If you are interested in pre-releases in the *Development* edition, keep using the releases page.
+  to add our OBS repository to your system. We currently support all editions (*Stable*, *Development*, and 
+  *Unstable*) of Freeciv21 in OBS.
 
   OBS supports both ``x86_64`` and ``aarch64`` binaries.
+
+  Refer to :ref:`openSUSE Build Service (OBS) <coding-packaging-obs-support>` for which OS versions are 
+  supported.
+
+
+A comment about editions of Freeciv21:
+
+* The *Stable* edition is typically a point release behind *Development* and is maintained for long term 
+  support. We patch for bugs and rarely if ever add features to it.
+* The *Development* edition is being actively worked on. We are constantly adding new features, fixing bugs, 
+  and improving on existing features. Following our :doc:`Release </Contributing/release>` process, we tag the 
+  code periodically with a development or pre-stable release. The *Development* edition follows these 
+  pre-release builds.
+* The *Unstable* edition follows the ``HEAD`` of the ``master`` branch. This is bleeding edge code, may break, 
+  or crash. The edition is updated every time we merge a :doc:`Pull Request </Contributing/pull-request>` to 
+  ``master``. Your mileage may very, however the developers typically work hard to keep the game playable. 
+  Often if a breaking bug or issue is discovered it is resolved quickly. The developers play on *Unstable*, so 
+  there is some incentive to keep it working.
+
 
 Windows
 =======
@@ -36,7 +55,7 @@ These systems rely on the :file:`.deb` package file type.
 To install the Debian / Ubuntu package, we first need to add our build service repository. Once that is
 complete, we can install Freeciv21.
 
-:strong:`Debian 12 and above`:
+To install the *Stable* edition on :strong:`Debian`:
 
 .. code-block:: sh
 
@@ -60,7 +79,16 @@ Notes on the commands above:
   manually change the ``[##]`` in the example above with the value of the ``echo`` command.
 
 
-:strong:`Ubuntu 25.04 and above`:
+If you wish to install the *Development* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/Debian_[##]/``
+to ``https://download.opensuse.org/repositories/home:/longturn:/development/Debian_[##]/``.
+
+If you wish to install the *Unstable* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/Debian_[##]/``
+to ``https://download.opensuse.org/repositories/home:/longturn:/unstable/Debian_[##]/``.
+
+
+To install the *Stable* edition on :strong:`Ubuntu`:
 
 .. code-block:: sh
 
@@ -82,6 +110,14 @@ Notes on the commands above:
 * The ``wget`` command downloads and installs the repository's GPG key needed by ``apt``.
 * The ``sudo bash -c`` command will write a sources :file:`.list` file. For it to work, you will need to
   manually change the ``[YY.MM]`` in the example above with the value of the ``echo`` command.
+
+If you wish to install the *Development* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/xUbuntu_[YY.MM]/``
+to ``https://download.opensuse.org/repositories/home:/longturn:/development/xUbuntu_[YY.MM]/``.
+
+If you wish to install the *Unstable* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/xUbuntu_[YY.MM]/``
+to ``https://download.opensuse.org/repositories/home:/longturn:/unstable/xUbuntu_[YY.MM]/``.
 
 
 :strong:`File from our Releases Page`:
@@ -106,7 +142,7 @@ that is complete, we can install Freeciv21.
   The Fedora and Tumbleweed repositories contain the key needed and is installed automatically, so do not
   worry that the commands below do not include steps.
 
-:strong:`Red Hat Fedora 43 and above`:
+To install the *Stable* edition on :strong:`Red Hat Fedora`:
 
 .. code-block:: sh
 
@@ -124,7 +160,19 @@ Notes on the commands above:
 * The ``dnf`` command will add the repository to your system. You will need to manually change the ``[##]``
   in the example above with the value of the ``echo`` command.
 
-:strong:`openSUSE Tumbleweed`:
+
+If you wish to install the *Development* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/Fedora_[##]/home:longturn.repo``
+to 
+``https://download.opensuse.org/repositories/home:/longturn:/development/Fedora_[##]/home:longturn:development.repo``.
+
+If you wish to install the *Unstable* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/Fedora_[##]/home:longturn.repo``
+to 
+``https://download.opensuse.org/repositories/home:/longturn:/unstable/Fedora_[##]/home:longturn:unstable.repo``.
+
+
+To install the *Stable* edition on :strong:`openSUSE Tumbleweed`:
 
 openSUSE Tumbleweed is a rolling release, which means it does not have a specific version. With that, we
 simply add the repository.
@@ -134,6 +182,18 @@ simply add the repository.
   $ sudo zypper addrepo --refresh \
       https://download.opensuse.org/repositories/home:/longturn/openSUSE_Tumbleweed/ Longturn
   $ sudo zypper install freeciv21
+
+
+If you wish to install the *Development* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/openSUSE_Tumbleweed/ Longturn``
+to 
+``https://download.opensuse.org/repositories/home:/longturn:/development/openSUSE_Tumbleweed/ Longturn:Development``.
+
+If you wish to install the *Unstable* edition change 
+``https://download.opensuse.org/repositories/home:/longturn/openSUSE_Tumbleweed/ Longturn``
+to 
+``https://download.opensuse.org/repositories/home:/longturn:/unstable/openSUSE_Tumbleweed/ Longturn:Unstable``.
+
 
 Generic Linux
 =============
@@ -181,7 +241,7 @@ Fedora/Red Hat variants (those that rely on ``dnf`` for package management):
   $ sudo flatpak install net.longturn.freeciv21
 
 
-If you want to install the *Development* version of Freeciv21, you can use the Flathub Beta repository. 
+If you want to install the *Development* edition of Freeciv21, you can use the Flathub Beta repository. 
 
 .. code-block:: sh
 
@@ -211,6 +271,7 @@ game to the Applications folder. When finished, unmount the package.
   * https://appletoolbox.com/app-is-damaged-cannot-be-opened-mac/
   * https://support.apple.com/guide/mac-help/open-an-app-by-overriding-security-settings-mh40617/15.0/mac/15.0
 
+
 Docker
 ======
 
@@ -234,8 +295,8 @@ them: https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
   We do not support every single language code in the list above, but we do have some translations for many of
   them.
 
-On a Linux or macOS based system, open a terminal and set the ``LANG`` variable to the language code. In the example
-we pick German (Deutsch).
+On a Linux or macOS based system, open a terminal and set the ``LANG`` variable to the language code. In the 
+example we pick German (Deutsch).
 
 .. code-block:: sh
 
@@ -257,6 +318,7 @@ Following the example above, we pick German and then open the game via ``snap``.
   You can also add ``export LANG=de_DE.UTF8`` to your user's :file:`.bashrc` or :file:`.bash_profile`.
   On macOS use :file:`.zshrc`. The variable will then be set every time you logon to your computer. However,
   this could also sets the language for pretty much every application.
+
 
 The ``LANG`` variable also works on Windows based systems. Open a command prompt, powershell prompt, or
 terminal.

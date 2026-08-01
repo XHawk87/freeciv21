@@ -273,29 +273,33 @@ release of a ``stable`` or ``master`` branch Git Tag.
 openSUSE Build Service (OBS)
 ============================
 
-* Package Repository (stable): https://build.opensuse.org/project/show/home:longturn
-* Package Repository (development): https://build.opensuse.org/project/show/home:louis94_m:freeciv21
+* Primary Package Project: https://build.opensuse.org/project/show/home:longturn
+* Secondary Package Project (development and pull requests): https://build.opensuse.org/project/show/home:louis94_m:freeciv21
 * Package Downloads (stable): https://download.opensuse.org/repositories/home:/longturn/
-* Package Downloads (development): https://download.opensuse.org/repositories/home:/louis94_m:/freeciv21/
+* Package Downloads (development): https://download.opensuse.org/repositories/home:/longturn:/development/
+* Package Downloads (unstable): https://download.opensuse.org/repositories/home:/longturn:/unstable/
 * OBS User Guide: https://openbuildservice.org/help/manuals/obs-user-guide/
 * OBS RPM Guidelines: https://en.opensuse.org/openSUSE:Specfile_guidelines
-* Fedora RPM Guidelines: https://docs.fedoraproject.org/en-US/packaging-guidelines/
+* OBS Packaging WiKi: https://en.opensuse.org/Portal:Packaging
 * OBS DEB Guidelines: https://en.opensuse.org/openSUSE:Build_Service_Debian_builds
+* Fedora RPM Guidelines: https://docs.fedoraproject.org/en-US/packaging-guidelines/
 
 Source Files: Refer to :file:`.obs/` in our GitHub repository.
 
 OBS is a package building service hosted by the folks over at openSUSE. It gives us the ability to support
 packages for multiple distributions for both the :file:`.deb` and :file:`.rpm` worlds.
 
-As of this writing, the stable OBS repository only supports the *Stable* release and all of the source files
-are hosted at OBS. Support for the *Development* edition is on our sandbox at this time. The ``master``
-branch hosts the files that OBS needs in the :file:`.obs/` directory as noted above.
+The primary package project supports all 3 editions of the game: *Stable*, *Development*, and *Unstable*. All
+of the source files are also hosted at OBS. The ``master`` branch hosts the files that OBS needs in the 
+:file:`.obs/` directory as noted above.
 
-Both versions of our package rely on an OBS hosted file named :file:`_service`. This is an XML file telling
-OBS how to build the package. The file on the *Stable* repository is very simple, just download the tarball
-and build. The *Development* version of the file is more complex as we rely on some GitHub integration tools:
-``obs_scm``, ``tar``, ``recompress``, and ``set_version``. All are hosted in OBS at the ``openSUSE:Tools``
-project (see the :menuselection:`Meta` tab in the project settings).
+All editions of our package rely on an OBS hosted file named :file:`_service`. This is an XML file telling
+OBS how to build the package. The file on the *Stable* project is very simple, just download the tarball
+and build. The *Development* and *Unstable* editions of the file is more complex as we rely on some GitHub 
+integration tools: ``obs_scm``, ``tar``, ``recompress``, and ``set_version``. All are hosted in OBS at the 
+``openSUSE:Tools`` project (see the :menuselection:`Meta` tab in the project settings).
+
+.. _coding-packaging-obs-support:
 
 :strong:`Stable Support`
 
@@ -304,22 +308,26 @@ The *Stable* package is supported on the following distributions:
 * Debian 12 Bookworm LTS
 * Debian 13 Trixie LTS
 * Debian Testing (future 14 Forky)
+* Fedora 40
 * Fedora 41
 * Fedora 42
 * Fedora 43
+* Fedora 44
+* Fedora Rawhide
 * openSUSE Tumbleweed
 * Ubuntu 24.04 LTS
 * Ubuntu 24.10
 * Ubuntu 25.04
+* Ubuntu 25.10
 * Ubuntu 26.04 LTS
 
 :strong:`Development Support`
 
-The *Development* package is supported on the following distributions:
+The *Development* and *Untable* package is supported on the following distributions:
 
 * Debian 13 Trixie LTS
 * Debian Testing (future 14 Forky)
-* Debian Unstable (Sid)
+* Fedora 42
 * Fedora 43
 * Fedora 44
 * Fedora Rawhide
@@ -337,9 +345,9 @@ The :file:`.deb` packaging system relies on the following files:
 * :file:`freeciv21.dsc` --- The Debian Source Control file.
 
 The :file:`freeciv21.dsc` controls the whole process. For *Stable* we have code in the file telling the system
-where to get the source :file:`tar.gz`. For *Development* we use an OBS service integration called ``obs_scm``
-that pulls the code from our GitHub repository. The ``tar`` and ``recompress`` services builds a :file:`tar.gz`
-automatically. Lastly the ``set_version`` service helps us with auto versioning.
+where to get the source :file:`tar.gz`. For *Development* and *Unstable* we use an OBS service integration 
+called ``obs_scm`` that pulls the code from our GitHub repository. The ``tar`` and ``recompress`` services 
+builds a :file:`tar.gz` automatically. Lastly the ``set_version`` service helps us with auto versioning.
 
 To update the package on *Stable*:
 

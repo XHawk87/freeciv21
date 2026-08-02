@@ -14,11 +14,11 @@
 // common
 #include "city.h" // CITY_MAP_*
 #include "fc_types.h"
-#include "player.h"   // enum plrcolor_mode
-#include "rgbcolor.h" // struct rgbcolor
-#include "traits.h"   // struct trait_limits
-#include "unittype.h" // struct veteran_system
-#include "world_object.h" // IWYU pragma: keep - (FIXME) struct world needed by scriptcore
+#include "player.h"       // enum plrcolor_mode
+#include "rgbcolor.h"     // struct rgbcolor
+#include "traits.h"       // struct trait_limits
+#include "unittype.h"     // struct veteran_system
+#include "world_object.h" // struct world
 
 // Qt
 #include <QMutex>

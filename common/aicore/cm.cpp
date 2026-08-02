@@ -17,7 +17,7 @@
 #include "fc_types.h"
 #include "game.h"
 #include "government.h"
-#include "map.h" // IWYU pragma: keep
+#include "map.h" // IWYU pragma: keep -- map.h and tile.h work closely together. Must keep map.h included
 #include "player.h"
 #include "specialist.h"
 #include "tile.h"

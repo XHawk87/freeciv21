@@ -11,7 +11,6 @@
 // common
 #include "extras.h"
 #include "fc_types.h"
-#include "game.h" // IWYU pragma: keep -- needed by extras.h:extra_type_iterate()
 #include "tile.h"
 #include "unit.h"
 #include "unitlist.h"

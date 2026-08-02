@@ -6,7 +6,6 @@
 
 // utility
 #include "bitvector.h"
-#include "iterator.h" // IWYU pragma: keep
 #include "log.h"
 #include "shared.h"
 

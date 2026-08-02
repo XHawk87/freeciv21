@@ -230,7 +230,8 @@ bool player_knows_extra_exist(const struct player *pplayer,
 #define extra_type_iterate(_p)                                              \
   {                                                                         \
     int _i_##_p;                                                            \
-    for (_i_##_p = 0; _i_##_p < game.control.num_extra_types; _i_##_p++) {  \
+    int extra_count##_p = extra_count();                                    \
+    for (_i_##_p = 0; _i_##_p < extra_count##_p; _i_##_p++) {               \
       struct extra_type *_p = extra_by_number(_i_##_p);
 
 #define extra_type_iterate_end                                              \

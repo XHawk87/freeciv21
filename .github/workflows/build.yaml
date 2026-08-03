@@ -213,8 +213,8 @@ jobs:
       - name: Install VCPKG
         uses: lukka/run-vcpkg@v11
         with:
-          # 2026.06.24 Release
-          vcpkgGitCommitId: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3
+          # 2026.07.29 Release
+          vcpkgGitCommitId: 9e593bb18ea69cc5095e012465dcd675a822ed0d
           vcpkgDirectory: D:/vcpkg
       # Ensure we have the most recent copy of the repo
       - name: Update VCPKG
@@ -271,8 +271,8 @@ jobs:
       - name: Install VCPKG
         uses: lukka/run-vcpkg@v11
         with:
-          # 2026.06.24 Release
-          vcpkgGitCommitId: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3
+          # 2026.07.29 Release
+          vcpkgGitCommitId: 9e593bb18ea69cc5095e012465dcd675a822ed0d
       # Ensure we have the most recent copy of the repo
       - name: Update VCPKG
         run: |
@@ -359,8 +359,8 @@ jobs:
       - name: Install VCPKG
         uses: lukka/run-vcpkg@v11
         with:
-          # 2026.06.24 Release
-          vcpkgGitCommitId: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3
+          # 2026.07.29 Release
+          vcpkgGitCommitId: 9e593bb18ea69cc5095e012465dcd675a822ed0d
       # Ensure we have the most recent copy of the repo
       - name: Update VCPKG
         run: |

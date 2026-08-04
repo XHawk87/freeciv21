@@ -827,24 +827,6 @@ do
     return index_iterate(find.team)
   end
 
-  local function find_city(city_id)
-    return find.city(nil, city_id)
-  end
-
-  -- Iterate over all cities in the world regardless of nation
-  function find.cities_iterate()
-    return index_iterate(find_city)
-  end
-
-  local function find_unit(unit_id)
-    return find.unit(nil, unit_id)
-  end
-
-  -- Iterate over all cities in the world regardless of nation
-  function find.units_iterate()
-    return index_iterate(find_unit)
-  end
-
   -- Iterate over all tiles of the game
   function find.tiles_iterate()
     return index_iterate(find.tile)

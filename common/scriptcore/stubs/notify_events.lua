@@ -23,7 +23,6 @@
 --- These correspond to the categories that the client can filter on.
 --- 
 --- @class E
---- @field name string The player's name.
 --- @field TECH_GAIN enum Acquired New Tech.
 --- @field TECH_LEARNED enum Learned New Tech.
 --- @field TECH_GOAL enum Selected New Goal.

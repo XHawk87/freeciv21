@@ -1,36 +1,34 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
+// self
+#include "connecthand.h"
+
+// generated
 #include <fc_config.h>
-
-#include <cstring>
+#include <fc_version.h>
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "capability.h"
 #include "fcintl.h"
 #include "log.h"
 #include "registry_ini.h"
+#include "shared.h"
 #include "support.h"
 
-// generated
-#include "fc_version.h"
-
 // common
+#include "ai.h"
 #include "capstr.h"
+#include "connection.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
 #include "packets.h"
 #include "player.h"
 #include "team.h"
+#include "timing.h"
 #include "version.h"
 
 // server
@@ -51,7 +49,13 @@
 #include "stdinhand.h"
 #include "voting.h"
 
-#include "connecthand.h"
+// Qt
+#include <QString>
+#include <QtGlobal>  // qUtf8Printable
+#include <QtLogging> // qInfo, qDebug, qWarning, qCritical
+
+// std
+#include <cstring>
 
 static bool connection_attach_real(server_connection *pconn,
                                    const char *username,

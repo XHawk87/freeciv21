@@ -1,38 +1,16 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
+// generated
 #include <fc_config.h>
-
-#include <QString>
-
-#include <csignal>
-#include <cstdio>
-#include <cstdlib>
-#ifdef FREECIV_MSWINDOWS
-#include <windows.h>
-#else
-#include <unistd.h> // SIGHUP, SIGPIPE
-#endif
-
-// Qt
-#include <QCommandLineParser>
-#include <QCoreApplication>
 
 // utility
 #include "deprecations.h"
 #include "fciconv.h"
 #include "fcintl.h"
 #include "log.h"
+#include "net_types.h"
+#include "shared.h"
 #include "support.h"
 #include "timing.h"
 
@@ -42,11 +20,32 @@
 #include "version.h"
 
 // server
-#include "aiiface.h"
 #include "console.h"
 #include "sernet.h"
 #include "server.h"
 #include "srv_main.h"
+
+// Qt
+#include <QCommandLineParser>
+#include <QCoreApplication>
+#include <QLatin1String>
+#include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
+#include <QObject>          // Q_OBJECT
+#include <QString>
+#include <QtLogging> // qInfo
+
+// std
+#include <cerrno> // errno
+#include <csignal>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring> // str*, mem*
+
+#ifdef FREECIV_MSWINDOWS
+#include <windows.h>
+#else
+#include <unistd.h> // SIGHUP, SIGPIPE
+#endif
 
 #define save_and_exit(sig)                                                  \
   if (S_S_RUNNING == server_state()) {                                      \

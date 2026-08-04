@@ -1,21 +1,28 @@
-/*
- Copyright (c) 1996-2020 Freeciv21 and Freeciv contributors. This file is
- __    __          part of Freeciv21. Freeciv21 is free software: you can
-/ \\..// \    redistribute it and/or modify it under the terms of the GNU
-  ( oo )        General Public License  as published by the Free Software
-   \__/         Foundation, either version 3 of the License,  or (at your
-                      option) any later version. You should have received
-    a copy of the GNU General Public License along with Freeciv21. If not,
-                  see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "actiontools.h"
 
 // utility
+#include "fcintl.h"
+#include "log.h"
 #include "rand.h"
+#include "shared.h"
 
 // common
 #include "actions.h"
+#include "ai.h"
 #include "effects.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "nation.h"
+#include "player.h"
+#include "requirements.h"
+#include "tile.h"
+#include "unit.h"
+#include "unittype.h"
 
 // server
 #include "aiiface.h"
@@ -24,7 +31,9 @@
 #include "unithand.h"
 #include "unittools.h"
 
-#include "actiontools.h"
+// Qt
+#include <QString>
+#include <QtGlobal> // qUtf8Printable
 
 typedef void (*action_notify)(struct player *, const struct action *,
                               struct player *, struct player *,

@@ -1,18 +1,18 @@
-/*
-\^~~~~\   )  (   /~~~~^/ *     _      Copyright (c) 1996-2020 Freeciv21 and
- ) *** \  {**}  / *** (  *  _ {o} _      Freeciv contributors. This file is
-  ) *** \_ ^^ _/ *** (   * {o}{o}{o}   part of Freeciv21. Freeciv21 is free
-  ) ****   vv   **** (   *  ~\ | /~software: you can redistribute it and/or
-   )_****      ****_(    *    OoO      modify it under the terms of the GNU
-     )*** m  m ***(      *    /|\      General Public License  as published
-       by the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version. You should have received  a copy of
-                        the GNU General Public License along with Freeciv21.
-                                 If not, see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "animals.h"
+
+// utility
+#include "fcintl.h"
+#include "log.h"
+#include "support.h"
 
 // common
 #include "ai.h"
+#include "extras.h"
+#include "fc_types.h"
 #include "game.h"
 #include "map.h"
 #include "movement.h"
@@ -20,6 +20,7 @@
 #include "player.h"
 #include "research.h"
 #include "tile.h"
+#include "unitlist.h"
 #include "unittype.h"
 
 // server
@@ -31,8 +32,6 @@
 
 // ai
 #include "difficulty.h"
-
-#include "animals.h"
 
 /**
    Return suitable animal type for the terrain

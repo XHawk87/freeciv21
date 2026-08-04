@@ -1,36 +1,33 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
+// self
+#include "aiiface.h"
+
+// generated
 #include <fc_config.h>
+
+// utility
+#include "fcintl.h"
+#include "log.h"
+
+// common
+#include "ai.h"
+#include "fc_types.h"
+#include "player.h"
+
+// ai
+#include "classicai.h"
+
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
+
+// std
+#include <cstdlib> // EXIT_FAILURE
 
 #ifdef AI_MODULES
 #include <ltdl.h>
 #endif
-
-// utility
-#include "support.h"
-
-// common
-#include "ai.h"
-#include "player.h"
-
-/* server/advisors */
-#include "autosettlers.h"
-
-/* ai/classic */
-#include "classicai.h"
-
-#include "aiiface.h"
 
 #ifdef AI_MOD_STATIC_THREADED
 bool fc_ai_threaded_setup(struct ai_type *ai);

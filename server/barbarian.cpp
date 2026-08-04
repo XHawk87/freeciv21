@@ -1,19 +1,8 @@
-/*
-_   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
- \  |    This file is part of Freeciv21. Freeciv21 is free software: you
-  \_|        can redistribute it and/or modify it under the terms of the
- .' '.              GNU General Public License  as published by the Free
- :O O:             Software Foundation, either version 3 of the License,
- '/ \'           or (at your option) any later version. You should have
-  :X:      received a copy of the GNU General Public License along with
-  :X:              Freeciv21. If not, see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-/**
-  Functions for creating barbarians in huts, land and sea
-  Started by Jerzy Klek <jekl@altavista.net>
-  with more ideas from Falk Hueffner
- */
+// self
+#include "barbarian.h"
 
 // utility
 #include "fcintl.h"
@@ -23,17 +12,29 @@ _   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
 
 // common
 #include "actions.h"
+#include "ai.h"
+#include "city.h"
 #include "effects.h"
-#include "events.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
-#include "government.h"
 #include "map.h"
 #include "movement.h"
 #include "nation.h"
+#include "player.h"
 #include "research.h"
 #include "terrain.h"
+#include "tile.h"
+#include "unit.h"
+#include "unitlist.h"
+#include "unittype.h"
+
+// ai
+#include "difficulty.h"
 
 // server
+#include "advdata.h"
 #include "aiiface.h"
 #include "citytools.h"
 #include "maphand.h"
@@ -44,13 +45,8 @@ _   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
 #include "unithand.h"
 #include "unittools.h"
 
-/* server/advisors */
-#include "advdata.h"
-
-// ai
-#include "difficulty.h"
-
-#include "barbarian.h"
+// Qt
+#include <QtLogging> // qDebug, qWarning, qCritical
 
 #define BARBARIAN_INITIAL_VISION_RADIUS 3
 #define BARBARIAN_INITIAL_VISION_RADIUS_SQ 9

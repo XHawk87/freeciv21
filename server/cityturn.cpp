@@ -1,18 +1,12 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2023 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <cmath> // exp, sqrt
-#include <cstring>
+// self
+#include "cityturn.h"
+
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "fcintl.h"
@@ -21,9 +15,6 @@
 #include "shared.h"
 #include "support.h"
 
-/* common/aicore */
-#include "cm.h"
-
 // common
 #include "achievements.h"
 #include "actiontools.h"
@@ -31,46 +22,59 @@
 #include "calendar.h"
 #include "citizens.h"
 #include "city.h"
+#include "cm.h"
+#include "connection.h"
 #include "culture.h"
 #include "disaster.h"
 #include "effects.h"
-#include "events.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
 #include "government.h"
+#include "improvement.h"
 #include "map.h"
+#include "nation.h"
 #include "player.h"
+#include "requirements.h"
 #include "research.h"
 #include "server_settings.h"
+#include "spaceship.h"
 #include "specialist.h"
 #include "style.h"
 #include "tech.h"
+#include "terrain.h"
+#include "tile.h"
 #include "traderoutes.h"
 #include "unit.h"
 #include "unitlist.h"
+#include "unittype.h"
 #include "worklist.h"
 
-/* common/scriptcore */
-#include "luascript_types.h"
-
 // server
+#include "advbuilding.h"
 #include "citizenshand.h"
 #include "citytools.h"
-#include "cityturn.h"
 #include "maphand.h"
 #include "notify.h"
 #include "plrhand.h"
 #include "sanitycheck.h"
+#include "script_server.h"
 #include "spacerace.h"
 #include "srv_log.h"
 #include "techtools.h"
 #include "unittools.h"
 
-/* server/advisors */
-#include "advbuilding.h"
-#include "advdata.h"
+// Qt
+#include <QString>
+#include <QtGlobal>  // qUtf8Printable
+#include <QtLogging> // qDebug, qWarning, qCritical
 
-/* server/scripting */
-#include "script_server.h"
+// std
+#include <algorithm> // std:min, std:max
+#include <cmath>     // exp, sqrt
+#include <cstring>
+#include <memory> // std::unique_ptr
 
 // Queue for pending city_refresh()
 static struct city_list *city_refresh_queue = nullptr;

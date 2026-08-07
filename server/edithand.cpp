@@ -1,34 +1,39 @@
-/*
-    Copyright (c) 1996-2020 Freeciv21 and Freeciv  contributors. This file
-                         is part of Freeciv21. Freeciv21 is free software:
-|\_/|,,_____,~~`        you can redistribute it and/or modify it under the
-(.".)~~     )`~}}    terms of the GNU General Public License  as published
- \o/\ /---~\\ ~}}     by the Free Software Foundation, either version 3 of
-   _//    _// ~}       the License, or (at your option) any later version.
-                        You should have received a copy of the GNU General
-                          Public License along with Freeciv21. If not, see
-                                            https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <QSet>
-#include <climits> // USHRT_MAX
+// self
+#include "edithand.h"
+
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "bitvector.h"
 #include "fcintl.h"
-#include "log.h"
 #include "shared.h"
 #include "support.h"
 
 // common
+#include "city.h"
+#include "connection.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
 #include "government.h"
+#include "improvement.h"
 #include "map.h"
 #include "movement.h"
 #include "nation.h"
+#include "player.h"
 #include "research.h"
+#include "tech.h"
 #include "terrain.h"
+#include "tile.h"
+#include "unit.h"
 #include "unitlist.h"
+#include "unittype.h"
 
 // server
 #include "aiiface.h"
@@ -37,21 +42,24 @@
 #include "connecthand.h"
 #include "gamehand.h"
 #include "hand_gen.h"
+#include "mapgen_utils.h"
 #include "maphand.h"
 #include "notify.h"
 #include "plrhand.h"
-#include "sanitycheck.h"
+#include "savemain.h"
 #include "server_connection.h"
+#include "srv_main.h"
 #include "techtools.h"
 #include "unittools.h"
 
-/* server/generator */
-#include "mapgen_utils.h"
+// Qt
+#include <QGlobalStatic> // Q_GLOBAL_STATIC
+#include <QSet>
 
-/* server/savegame */
-#include "savemain.h"
-
-#include "edithand.h"
+// std
+#include <climits> // USHRT_MAX
+#include <cstring> // str*, mem*
+#include <utility> // std::as_const
 
 /* Set if anything in a sequence of edits triggers the expensive
  * assign_continent_numbers() check, which will be done once when the

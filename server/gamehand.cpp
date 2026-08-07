@@ -1,37 +1,44 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-#include <QtWidgets/QtWidgets>
-#include <cstdio> // for remove()
+// self
+#include "gamehand.h"
+
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "fcintl.h"
 #include "log.h"
 #include "rand.h"
 #include "registry.h"
+#include "registry_ini.h"
 #include "section_file.h"
 #include "shared.h"
 #include "support.h"
+#include "timing.h"
 
 // common
 #include "ai.h"
 #include "calendar.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
+#include "map.h"
+#include "map_types.h"
 #include "movement.h"
 #include "nation.h"
+#include "player.h"
 #include "team.h"
+#include "terrain.h"
+#include "tile.h"
+#include "unit.h"
+#include "unittype.h"
 
 // server
+#include "advdata.h"
 #include "citytools.h"
 #include "connecthand.h"
 #include "maphand.h"
@@ -41,10 +48,19 @@
 #include "stdinhand.h"
 #include "unittools.h"
 
-/* server/advisors */
-#include "advdata.h"
+// Qt
+#include <QByteArrayAlgorithms> // qstr*
+#include <QString>
+#include <QVector>
+#include <QtContainerFwd> // QVector<QString>
+#include <QtGlobal>       // qUtf8Printable
+#include <QtLogging>      // qInfo, qDebug, qWarning, qCritical
 
-#include "gamehand.h"
+// std
+#include <cstdio>  // for remove()
+#include <cstdlib> // abs
+#include <cstring> // str*, mem*
+#include <utility> // std::as_const
 
 #define CHALLENGE_ROOT "challenge"
 

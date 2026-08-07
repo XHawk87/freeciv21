@@ -16,6 +16,8 @@
 
 // generated
 #include <fc_config.h>
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // common
 #include "chat.h"

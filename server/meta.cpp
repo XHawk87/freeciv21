@@ -1,38 +1,28 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
+// self
+#include "meta.h"
+
+// generated
 #include <fc_config.h>
-
-// Qt
-#include <QEventLoop>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QUrl>
-#include <QUrlQuery>
 
 // utility
 #include "fcintl.h"
 #include "fcthread.h"
 #include "log.h"
+#include "shared.h"
 #include "support.h"
 #include "timing.h"
 
 // common
 #include "capstr.h"
 #include "connection.h"
+#include "fc_types.h"
 #include "game.h"
+#include "map_types.h"
 #include "nation.h"
+#include "player.h"
 #include "version.h"
 
 // server
@@ -42,7 +32,24 @@
 #include "settings.h"
 #include "srv_main.h"
 
-#include "meta.h"
+// Qt
+#include <QEventLoop>
+#include <QGlobalStatic> // Q_GLOBAL_STATIC
+#include <QLatin1String>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QObject> // Q_OBJECT
+#include <QString>
+#include <QStringLiteral>
+#include <QThread>
+#include <QUrl>
+#include <QUrlQuery>
+#include <QtGlobal>  // qUtf8Printable
+#include <QtLogging> // qInfo, qDebug, qWarning, qCritical
+
+// std
+#include <cstring> // str*, mem*
 
 static bool server_is_open = false;
 static bool persistent_meta_connection = false;

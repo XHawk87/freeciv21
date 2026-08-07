@@ -1,29 +1,28 @@
-/*
-_   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
- \  |    This file is part of Freeciv21. Freeciv21 is free software: you
-  \_|        can redistribute it and/or modify it under the terms of the
- .' '.              GNU General Public License  as published by the Free
- :O O:             Software Foundation, either version 3 of the License,
- '/ \'           or (at your option) any later version. You should have
-  :X:      received a copy of the GNU General Public License along with
-  :X:              Freeciv21. If not, see https://www.gnu.org/licenses/.
- */
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
 
-// Qt
-#include <QHash>
-#include <QString>
+// self
+#include "fcdb.h"
 
 // utility
 #include "fcintl.h"
 #include "log.h"
 #include "registry.h"
+#include "registry_ini.h"
 #include "section_file.h"
 #include "support.h"
 
-/* server/scripting */
+// server
 #include "script_fcdb.h"
 
-#include "fcdb.h"
+// Qt
+#include <QHash>
+#include <QString>
+#include <QtLogging> // qInfo, qDebug, qWarning, qCritical
+
+// std
+#include <cstring> // str*, mem*
+#include <utility> // std::as_const
 
 struct fcdb_option {
   char *value;

@@ -1,32 +1,36 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "plrhand.h"
+
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "bitvector.h"
+#include "fcintl.h"
 #include "log.h"
 #include "rand.h"
 #include "shared.h"
 #include "support.h"
 
 // common
+#include "ai.h"
 #include "citizens.h"
+#include "city.h"
 #include "culture.h"
 #include "effects.h"
+#include "extras.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
 #include "government.h"
 #include "improvement.h"
 #include "map.h"
 #include "multipliers.h"
+#include "nation.h"
 #include "packets.h"
 #include "player.h"
 #include "research.h"
@@ -34,9 +38,19 @@
 #include "style.h"
 #include "team.h"
 #include "tech.h"
+#include "tile.h"
+#include "traderoutes.h"
+#include "unit.h"
 #include "unitlist.h"
+#include "unittype.h"
+
+// ai
+#include "aitraits.h"
+#include "difficulty.h"
+#include "handicaps.h"
 
 // server
+#include "advdata.h"
 #include "aiiface.h"
 #include "barbarian.h"
 #include "citytools.h"
@@ -47,8 +61,7 @@
 #include "maphand.h"
 #include "mood.h"
 #include "notify.h"
-#include "plrhand.h"
-#include "server_connection.h"
+#include "script_server.h"
 #include "spacerace.h"
 #include "spaceship.h"
 #include "srv_main.h"
@@ -57,15 +70,14 @@
 #include "unittools.h"
 #include "voting.h"
 
-/* server/advisors */
-#include "advdata.h"
-/* server/scripting */
-#include "script_server.h"
+// Qt
+#include <QByteArrayAlgorithms> // qstr*
+#include <QChar>
+#include <QtLogging> // qInfo, qDebug, qWarning, qCritical
 
-// ai
-#include "aitraits.h"
-#include "difficulty.h"
-#include "handicaps.h"
+// std
+#include <cstddef> // size_t
+#include <cstring> // str*, mem*
 
 struct rgbcolor;
 

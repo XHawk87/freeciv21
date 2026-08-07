@@ -8,6 +8,10 @@ _   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
   :X:      received a copy of the GNU General Public License along with
   :X:              Freeciv21. If not, see https://www.gnu.org/licenses/.
  */
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
+
 // utility
 #include "fcintl.h"
 #include "log.h"
@@ -18,11 +22,13 @@ _   ._       Copyright (c) 1996-2021 Freeciv21 and Freeciv contributors.
 #include "effects.h"
 #include "game.h"
 #include "government.h"
+#include "map.h"
 #include "movement.h"
 #include "player.h"
 #include "research.h"
 #include "team.h"
 #include "tech.h"
+#include "tile.h"
 #include "unit.h"
 
 /* common/scriptcore */

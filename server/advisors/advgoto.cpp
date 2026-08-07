@@ -16,6 +16,7 @@
 #include "ai.h"
 #include "combat.h"
 #include "game.h"
+#include "map.h"
 #include "movement.h"
 #include "tile.h"
 #include "unit.h"

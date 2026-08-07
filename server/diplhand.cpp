@@ -1,47 +1,47 @@
-/*__            ___                 ***************************************
-/   \          /   \          Copyright (c) 1996-2020 Freeciv21 and Freeciv
-\_   \        /  __/          contributors. This file is part of Freeciv21.
- _\   \      /  /__     Freeciv21 is free software: you can redistribute it
- \___  \____/   __/    and/or modify it under the terms of the GNU  General
-     \_       _/          Public License  as published by the Free Software
-       | @ @  \_               Foundation, either version 3 of the  License,
-       |                              or (at your option) any later version.
-     _/     /\                  You should have received  a copy of the GNU
-    /o)  (o/\ \_                General Public License along with Freeciv21.
-    \_____/ /                     If not, see https://www.gnu.org/licenses/.
-      \____/        ********************************************************/
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: Freeciv21 and Freeciv Contributors
+
+// self
+#include "diplhand.h"
+
+// generated
+#include <hand_gen.h>
+#include <packets_gen.h>
 
 // utility
 #include "bitvector.h"
 #include "fcintl.h"
 #include "log.h"
+#include "shared.h"
 
 // common
 #include "ai.h"
+#include "city.h"
 #include "diptreaty.h"
 #include "effects.h"
-#include "events.h"
+#include "fc_types.h"
+#include "featured_text.h"
 #include "game.h"
+#include "nation.h"
 #include "packets.h"
 #include "player.h"
+#include "requirements.h"
 #include "research.h"
-
-/* common/scriptcore */
-#include "luascript_types.h"
+#include "tech.h"
+#include "unit.h"
+#include "unitlist.h"
 
 // server
 #include "citytools.h"
-#include "cityturn.h"
 #include "maphand.h"
 #include "notify.h"
 #include "plrhand.h"
+#include "script_server.h"
 #include "techtools.h"
 #include "unittools.h"
 
-/* server/scripting */
-#include "script_server.h"
-
-#include "diplhand.h"
+// Qt
+#include <QtLogging> // qInfo, qDebug, qWarning, qCritical
 
 static struct treaty_list *treaties = nullptr;
 

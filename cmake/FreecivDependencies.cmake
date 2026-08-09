@@ -83,7 +83,7 @@ endif()
 # externally provided tolua program is required (or an emulator for the target
 # platform, eg qemu).
 find_package(Lua 5.3 REQUIRED)
-set(max_version 5.5)
+set(max_version 5.5.99)
 # TODO Drop LUA_VERSION_STRING once we can require CMake 4.2
 if ((DEFINED Lua_VERSION AND "${Lua_VERSION}" VERSION_GREATER "${max_version}")
     OR "${LUA_VERSION_STRING}" VERSION_GREATER "${max_version}")

@@ -1263,7 +1263,9 @@ int player_total_homeless_unit_gold_upkeep(const struct player *pplayer)
             player_name(pplayer));
   unit_list_iterate(pplayer->units, punit)
   {
-    if (unit_is_homeless(punit)) {
+    // get upkeep if the unit isn't homeless or we have the server setting
+    // set
+    if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
       gold_needed += punit->upkeep[O_GOLD];
       log_debug("homeless_gold_upkeep: [%s] "
                 "%s #%d is homeless and costs %d. Total %d",

@@ -2016,7 +2016,9 @@ void player_update_homeless_unit_gold_upkeep(struct player *pplayer)
   // punit struct
   unit_list_iterate(pplayer->units, punit)
   {
-    if (unit_is_homeless(punit)) {
+    // get upkeep if the unit isn't homeless or we have the server setting
+    // set
+    if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
       int cost = utype_upkeep_cost(unit_type_get(punit), pplayer, O_GOLD);
       log_debug("homeless_gold_upkeep: [%s] "
                 "%s #%d is homeless and costs %d",

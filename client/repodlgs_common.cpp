@@ -130,9 +130,13 @@ void get_economy_report_units_data(struct unit_entry *entries,
 
     unit_list_iterate(client.conn.playing->units, punit)
     {
-      if (unit_type_get(punit) == unittype && punit->upkeep[O_GOLD] > 0) {
+      if (unit_type_get(punit) == unittype) {
         count++;
-        partial_cost += punit->upkeep[O_GOLD];
+        // get upkeep if the unit isn't homeless or we have the server
+        // setting set
+        if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
+          partial_cost += punit->upkeep[O_GOLD];
+        }
       }
     }
     unit_list_iterate_end;

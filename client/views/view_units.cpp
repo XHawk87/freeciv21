@@ -663,8 +663,11 @@ std::vector<unit_view_entry> get_units_view_data()
           upgradable =
               client_has_player()
               && nullptr != can_upgrade_unittype(client_player(), unittype);
-
-          gold_cost += punit->upkeep[O_GOLD];
+          // get upkeep if the unit isn't homeless or we have the server
+          // setting set
+          if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
+            gold_cost += punit->upkeep[O_GOLD];
+          }
           food_cost += punit->upkeep[O_FOOD];
           shield_cost += punit->upkeep[O_SHIELD];
         }

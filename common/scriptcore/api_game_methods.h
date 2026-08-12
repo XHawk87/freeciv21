@@ -192,12 +192,14 @@ int api_methods_unit_type_veteran_level_max_get(lua_State *L,
                                                 Unit_Type *punit_type);
 
 // Unit Class
-bool api_methods_unit_class_has_flag(lua_State *L, Unit_Class *punit_class,
+bool api_methods_unit_class_has_flag(lua_State *L,
+                                     const Unit_Class *punit_class,
                                      const char *flag);
 const char *api_methods_unit_class_rule_name(lua_State *L,
-                                             Unit_Class *punit_class);
-const char *api_methods_unit_class_name_translation(lua_State *L,
-                                                    Unit_Class *punit_class);
+                                             const Unit_Class *punit_class);
+const char *
+api_methods_unit_class_name_translation(lua_State *L,
+                                        const Unit_Class *punit_class);
 
 // Unit_List_Link Type
 Unit *api_methods_unit_list_link_data(lua_State *L, Unit_List_Link *link);

@@ -130,7 +130,7 @@ void get_economy_report_units_data(struct unit_entry *entries,
 
     unit_list_iterate(client.conn.playing->units, punit)
     {
-      if (unit_type_get(punit) == unittype) {
+      if (unit_type_get(punit) == unittype && punit->upkeep[O_GOLD] > 0) {
         count++;
         // get upkeep if the unit isn't homeless or we have the server
         // setting set

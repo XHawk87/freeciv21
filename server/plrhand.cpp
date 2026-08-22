@@ -2009,16 +2009,20 @@ struct player_economic player_limit_to_max_rates(struct player *pplayer)
  */
 void player_update_homeless_unit_gold_upkeep(struct player *pplayer)
 {
+  // don't get upkeep with server setting
+  if (!game.server.homeless_gold_upkeep) {
+    return;
+  }
+
   log_debug("homeless_gold_upkeep: [%s] "
             "Updating homeless unit gold upkeep costs",
             player_name(pplayer));
+
   // save the upkeep for the player's homeless units in the corresponding
   // punit struct
   unit_list_iterate(pplayer->units, punit)
   {
-    // get upkeep if the unit isn't homeless or we have the server setting
-    // set
-    if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
+    if (unit_is_homeless(punit)) {
       int cost = utype_upkeep_cost(unit_type_get(punit), pplayer, O_GOLD);
       log_debug("homeless_gold_upkeep: [%s] "
                 "%s #%d is homeless and costs %d",

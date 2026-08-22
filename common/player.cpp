@@ -1257,15 +1257,19 @@ int player_get_expected_income(const struct player *pplayer)
 int player_total_homeless_unit_gold_upkeep(const struct player *pplayer)
 {
   fc_assert_ret_val(nullptr != pplayer, 0);
+
+  // don't get upkeep with server setting
+  if (!game.server.homeless_gold_upkeep) {
+    return 0;
+  }
+
   int gold_needed = 0;
   log_debug("homeless_gold_upkeep: [%s] "
             "Calculating homeless gold upkeep",
             player_name(pplayer));
   unit_list_iterate(pplayer->units, punit)
   {
-    // get upkeep if the unit isn't homeless or we have the server setting
-    // set
-    if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
+    if (unit_is_homeless(punit)) {
       gold_needed += punit->upkeep[O_GOLD];
       log_debug("homeless_gold_upkeep: [%s] "
                 "%s #%d is homeless and costs %d. Total %d",

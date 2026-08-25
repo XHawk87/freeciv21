@@ -91,7 +91,7 @@ deps=(
     lua5.3=5.3.6-2+b4
     liblua5.3-dev=5.3.6-2+b4
     libsqlite3-dev=3.46.1-7+deb13u1
-    libpq-dev=17.10-0+deb13u1
+    libpq-dev=17.11-0+deb13u1
     build-essential=12.12
     pkg-config=1.8.1-4
 )

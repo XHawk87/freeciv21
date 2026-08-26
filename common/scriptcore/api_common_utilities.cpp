@@ -26,6 +26,7 @@ extern "C" {
 #include "version.h"
 
 // Qt
+#include <QDateTime>
 #include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
 #include <QtLogging>        // QtMsgType
 
@@ -43,6 +44,29 @@ int api_utilities_random(int min, int max)
       (static_cast<double>(fc_rand(MAX_UINT32) % MAX_UINT32) / MAX_UINT32);
 
   return (min + floor(roll * (max - min + 1)));
+}
+
+/**
+ * Return a unix timestamp in fractional seconds since the epoch to
+ * millisecond precision.
+ */
+double api_utilities_time_now() { return seconds_since_epoch(); }
+
+/**
+ * Convert a unix timestamp in seconds since the epoch to an ISO-8601
+ * date-time string. E.g. 2026-08-08T10:44:37Z
+ */
+const char *api_utilities_time_datetime_format_iso8601(double unix_timestamp)
+{
+  return to_iso8601_datetime(unix_timestamp);
+}
+
+/**
+ * Convert a duration in seconds to an ISO-8601 period string. E.g. P3DT4H
+ */
+const char *api_utilities_time_duration_format_iso8601(double seconds)
+{
+  return to_iso8601_duration(seconds);
 }
 
 /**

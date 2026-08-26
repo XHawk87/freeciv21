@@ -40,3 +40,12 @@ function chat.msg(fmt, ...)
 end
 
 $]
+
+module game {
+  int api_client_game_seconds_since_turn_change
+    @ seconds_since_turn_change (lua_State *L);
+
+  int api_client_game_seconds_to_turn_change
+    @ seconds_to_turn_change (lua_State *L);
+}
+

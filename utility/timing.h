@@ -46,3 +46,11 @@ void timer_start(civtimer *t);
 void timer_stop(civtimer *t);
 
 double timer_read_seconds(civtimer *t);
+double seconds_since_epoch();
+const char *to_iso8601_datetime(qint64 unix_timestamp);
+const char *to_iso8601_duration(qint64 seconds);
+
+#define DAY_IN_SECONDS 86400
+#define HOUR_IN_SECONDS 3600
+#define MINUTE_IN_SECONDS 60
+#define MILLISECONDS_IN_A_SECOND 1000

@@ -16,3 +16,6 @@
 struct lua_State;
 
 void api_client_chat_base(lua_State *L, const char *msg);
+
+double api_client_game_seconds_since_turn_change(lua_State *L);
+double api_client_game_seconds_to_turn_change(lua_State *L);

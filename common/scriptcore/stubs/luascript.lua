@@ -19,22 +19,22 @@
 -- https://sphinx-lua-ls.readthedocs.io/en/stable/autodoc.html#autodoc-directives
 -- https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#rst-primer
 
---- @param text String The raw text to translate.
---- @return String translated The translated text.
+--- @param text string The raw text to translate.
+--- @return string translated The translated text.
 function _(text) end
 
---- @param text String The raw text to mark for translation.
---- @return String raw-text The raw text again.
+--- @param text string The raw text to mark for translation.
+--- @return string raw-text The raw text again.
 function N_(text) end
 
---- @param text String The raw text to disambiguate.
---- @return String translated The translated text.
+--- @param text string The raw text to disambiguate.
+--- @return string translated The translated text.
 function Q_(text) end
 
---- @param singular String The raw text in singular form.
---- @param plural String The raw text in plural form.
+--- @param singular string The raw text in singular form.
+--- @param plural string The raw text in plural form.
 --- @param count int The quantity to determine which form is used.
---- @return String translated The translated text for use with :lua:func:`string.format`.
+--- @return string translated The translated text for use with :lua:func:`string.format`.
 function PL_(singular, plural, count) end
 
 --- Generates a random number using Freeciv21's random number generator and
@@ -45,6 +45,26 @@ function PL_(singular, plural, count) end
 --- @return Number roll The random number.
 function random(min, max) end
 
---- @return String version The current version of the project.
+--- @return string version The current version of the project.
 function fc_version() end
+
+--- Time-related utilities
+---
+--- !doctype table
+--- @class time
+time = {}
+
+--- Get the current system time.
+--- @return Number Fractional seconds since the epoch.
+function time.now() end
+
+--- Get the timestamp in ISO-8601 format. E.g. "2026-08-08T10:44:37Z"
+--- @param unix_timestamp Number Seconds since the epoch.
+--- @return string Timestamp in ISO-8601 format.
+function time.to_iso8601_datetime(unix_timestamp) end
+
+--- Get the duration in ISO-8601 format. E.g. "P3DT4H"
+--- @param unix_timestamp Number Seconds since the epoch.
+--- @return string Timestamp in ISO-8601 format.
+function time.to_iso8601_duration(seconds) end
 

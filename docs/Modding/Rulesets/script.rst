@@ -247,6 +247,10 @@ Utilities
 .. lua:autoobject:: players_iterate
 .. lua:autoobject:: whole_map_iterate
 
+.. lua:autoobject:: time
+   :members:
+   :recursive:
+
 Debugging
 ^^^^^^^^^
 
@@ -254,8 +258,9 @@ Debugging
 .. lua:autoobject:: _freeciv_state_dump
 .. lua:autoobject:: signal.list
 .. lua:autoobject:: fc_version
-.. lua:autoobject:: _VERSION
-.. lua:autoobject:: assert
+
+* :lua:obj:`_VERSION`
+* :lua:func:`assert`
 
 .. _script-unit-loss-reasons:
 
@@ -384,12 +389,9 @@ killer's "units killed" score (if the killer is specified).
      - Yes
 
 .. note::
-   :literal:`*` The killer can be specified only by a script.
-
-   :literal:`**` Killer submitted only if the action was failed.
-
-   :literal:`***` A new unit is created under the new ownership to replace the
-                  old unit after the signal is processed.
+   - :literal:`*` The killer can be specified only by a script.
+   - :literal:`**` Killer submitted only if the action was failed.
+   - :literal:`***` A new unit is created under the new ownership to replace the old unit after the signal is processed.
 
 
 Lua Built-ins
@@ -404,29 +406,21 @@ document Lua builtins here, but just to mention a selection of the useful parts.
 Lua Functions
 ^^^^^^^^^^^^^
 
-.. lua:autoobject:: pcall
-.. lua:autoobject:: pairs
-.. lua:autoobject:: ipairs
+* :lua:func:`pcall`
+* :lua:func:`pairs`
+* :lua:func:`ipairs`
 
 Lua Globals
 ^^^^^^^^^^^
 
-.. lua:autoobject:: _G
+* :lua:obj:`_G`
 
 .. _script-lua-builtin-modules:
 
 Lua Modules
 ^^^^^^^^^^^
 
-.. lua:autoobject:: math
-   :members:
-   :recursive:
-
-.. lua:autoobject:: string
-   :members:
-   :recursive:
-
-.. lua:autoobject:: table
-   :members:
-   :recursive:
+* :lua:obj:`math`
+* `string <https://www.lua.org/manual/5.4/manual.html#pdf-string>`_
+* `table <https://www.lua.org/manual/5.4/manual.html#pdf-table>`_
 

@@ -166,6 +166,20 @@ module game {
     @ ruleset_name (lua_State *L);
 }
 
+$[
+
+-- game module implementation.
+
+function game.next_turn_change()
+  return time.now() + game.seconds_to_turn_change()
+end
+
+function game.last_turn_change()
+  return time.now() - game.seconds_since_turn_change()
+end
+
+$]
+
 /* Module Player. */
 module Player {
   module properties {

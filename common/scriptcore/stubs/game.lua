@@ -34,16 +34,16 @@
 --- @field name string The player's name.
 --- @field nation Nation_Type The nation from the nation list.
 --- @field is_alive boolean If the nation is currently considered alive based on the ruleset.
---- @field id int The unique ID for this player.
+--- @field id Number The unique ID for this player.
 --- @field team Team The player's team.
 Player = {}
 
 --- 
---- @return int cities The number of cities currently owned by this player.
+--- @return Number cities The number of cities currently owned by this player.
 function Player:num_cities() end
 
 --- 
---- @return int units The number of units currently owned by this player.
+--- @return Number units The number of units currently owned by this player.
 function Player:num_units() end
 
 --- 
@@ -52,7 +52,7 @@ function Player:num_units() end
 function Player:has_wonder(building) end
 
 --- 
---- @return int gold The amount of gold currently in this player's treasury.
+--- @return Number gold The amount of gold currently in this player's treasury.
 function Player:gold() end
 
 --- 
@@ -76,7 +76,7 @@ function Player:research_rule_name() end
 function Player:research_name_translation() end
 
 --- 
---- @return int culture The player's current culture score.
+--- @return Number culture The player's current culture score.
 function Player:culture() end
 
 --- .. list-table:: Player Flags
@@ -128,7 +128,7 @@ function Player:technologies_iterate() end
 --- Represents a Team of players that are locked together as allies.
 ---
 --- @class Team
---- @field id int The unique ID for this team
+--- @field id Number The unique ID for this team
 --- @field name string The name of the team
 Team = {}
 
@@ -141,8 +141,8 @@ function Team:members_iterate() end
 --- @field name string The name of the city.
 --- @field owner Player The current owner of the city.
 --- @field original Player The original founder of the city.
---- @field id int The unique ID for the city.
---- @field size int The number of citizens in this city.
+--- @field id Number The unique ID for the city.
+--- @field size Number The number of citizens in this city.
 --- @field tile Tile The tile this city is on.
 City = {}
 
@@ -158,7 +158,7 @@ function City:has_building(building) end
 function City:buildings_iterate() end
 
 --- 
---- @return int sq-radius The square radius of the city working area.
+--- @return Number sq-radius The square radius of the city working area.
 function City:map_sq_radius() end
 
 --- Returns whether the city would produce partisans if conquered from player
@@ -169,11 +169,11 @@ function City:map_sq_radius() end
 --- custom handler and ruleset could give different behaviour with different
 --- values of the 'Inspire_Partisans' effect.
 ---
---- @return int partisans Positive if it would inspire partisans.
+--- @return Number partisans Positive if it would inspire partisans.
 function City:inspire_partisans(inspirer) end
 
 --- 
---- @return int culture Current total culture score for this city.
+--- @return Number culture Current total culture score for this city.
 function City:culture() end
 
 --- .. note::
@@ -207,7 +207,7 @@ function City:exists() end
 --- Represents a player's current connection to the game server.
 ---
 --- @class Connection
---- @field id int The unique ID of the connection.
+--- @field id Number The unique ID of the connection.
 Connection = {}
 
 --- Represents a unit on the world map.
@@ -216,17 +216,17 @@ Connection = {}
 --- @field utype Unit_Type The type of unit this is.
 --- @field unit_class Unit_Class The class of this unit.
 --- @field owner Player The player who owns the unit.
---- @field id int The unique ID for this unit.
+--- @field id Number The unique ID for this unit.
 --- @field tile Tile The tile the unit is currently on.
---- @field hp int The number of hitpoints the unit currently has left.
+--- @field hp Number The number of hitpoints the unit currently has left.
 --- @field activity_name string The activity that the unit is currently performing.
---- @field activity_count int The number of work points that have been put into the current activity.
+--- @field activity_count Number The number of work points that have been put into the current activity.
 --- @field activity_target_name string The extra that is currently under construction, or nil.
 --- @field nationality Player The nationality of the people in the unit.
---- @field moves_left int The number of move fragments remaining.
---- @field veteran int The veterancy level of the unit.
---- @field veteran_move_bonus int The additional move (and work) points granted by the unit's veterancy level.
---- @field fuel int The amount of fuel remaining.
+--- @field moves_left Number The number of move fragments remaining.
+--- @field veteran Number The veterancy level of the unit.
+--- @field veteran_move_bonus Number The additional move (and work) points granted by the unit's veterancy level.
+--- @field fuel Number The amount of fuel remaining.
 Unit = {}
 
 --- 
@@ -282,19 +282,19 @@ end
 function Unit:veteran_power_bonus() end
 
 ---
---- @return int food The total amount of food consumed per turn in the home city.
+--- @return Number food The total amount of food consumed per turn in the home city.
 function Unit:upkeep_food() end
 
 ---
---- @return int shields The total amount of shields consumed per turn in the home city.
+--- @return Number shields The total amount of shields consumed per turn in the home city.
 function Unit:upkeep_shields() end
 
 ---
---- @return int gold The total amount of gold consumed per turn.
+--- @return Number gold The total amount of gold consumed per turn.
 function Unit:upkeep_gold() end
 
 ---
---- @return int citizens The total amount of unhappiness caused in the home city.
+--- @return Number citizens The total amount of unhappiness caused in the home city.
 function Unit:happy_cost() end
 
 --- Represents a tile on the world map.
@@ -308,12 +308,12 @@ function Unit:happy_cost() end
 --- @class Tile
 --- @field terrain Terrain The terrain type of this tile.
 --- @field owner Player The player who owns this tile, or nil.
---- @field id int The unique ID of this tile.
---- @field continent int The ID of the continent this tile is on.
---- @field nat_x int The X position of this tile on the native coordinate system.
---- @field nat_y int The Y position of this tile on the native coordinate system.
---- @field x int The X position of this tile on the map coordinate system.
---- @field y int The Y position of this tile on the map coordinate system.
+--- @field id Number The unique ID of this tile.
+--- @field continent Number The ID of the continent this tile is on.
+--- @field nat_x Number The X position of this tile on the native coordinate system.
+--- @field nat_y Number The Y position of this tile on the native coordinate system.
+--- @field x Number The X position of this tile on the map coordinate system.
+--- @field y Number The Y position of this tile on the map coordinate system.
 --- @field link_text string Link string fragment to add to messages sent to client.
 Tile = {}
 
@@ -355,12 +355,12 @@ function Tile:primary_resource_name() end
 function Tile:is_enemy(against) end
 
 --- 
---- @return int units The total number of units on this tile.
+--- @return Number units The total number of units on this tile.
 function Tile:num_units() end
 
 --- 
 --- @param other Tile A different tile to check against.
---- @return int dist The squared distance between these two tiles.
+--- @return Number dist The squared distance between these two tiles.
 function Tile:sq_distance(other) end
 
 --- Safe iteration over each :lua:obj:`Unit` on the tile.
@@ -390,7 +390,7 @@ function Tile:circle_iterate(sq_radius) end
 --- Represents a government type for this ruleset.
 ---
 --- @class Government
---- @field id int The unique ID of this government type.
+--- @field id Number The unique ID of this government type.
 Government = {}
 
 --- 
@@ -404,7 +404,7 @@ function Government:name_translation() end
 --- Represents a nation type for this ruleset.
 ---
 --- @class Nation_Type
---- @field id int The unique ID of this nation type.
+--- @field id Number The unique ID of this nation type.
 Nation_Type = {}
 
 --- 
@@ -423,8 +423,8 @@ function Nation_Type:plural_translation() end
 --- ruleset.
 ---
 --- @class Building_Type
---- @field build_cost int The number of shields required to construct.
---- @field id int The unique ID of the building type.
+--- @field build_cost Number The number of shields required to construct.
+--- @field id Number The unique ID of the building type.
 Building_Type = {}
 
 --- 
@@ -452,7 +452,7 @@ function Building_Type:rule_name() end
 function Building_Type:name_translation() end
 
 --- 
---- @return int cost The number of shields needed to construct this building.
+--- @return Number cost The number of shields needed to construct this building.
 function Building_Type:build_shield_cost()
   return self.build_cost
 end
@@ -460,27 +460,27 @@ end
 --- Represents a type of unit available in this ruleset.
 ---
 --- @class Unit_Type
---- @field id int The unique ID of the unit type.
+--- @field id Number The unique ID of the unit type.
 --- @field unit_class Unit_Class The class of this unit type.
---- @field build_cost int The number of shields required to make.
---- @field pop_cost int The number of citizens consumed to make.
---- @field attack int Base attack strength (0 = cannot attack.)
---- @field defense int Base defence strength (0 = cannot defend.)
---- @field hp int The maximum number of hitpoints.
---- @field firepower int Number of enemy hitpoints removed per successful round of combat.
---- @field bombard_rate int The number of rounds of bombardment.
---- @field move_rate int The base number of move fragments that can be employed each turn.
---- @field max_veteran_level int The maximum veteran level that units of this type can achieve.
---- @field vision_radius_sq int The base squared vision radius.
---- @field transport_cap int The number of passengers that can be held at once.
---- @field fuel int The maximum fuel that can be held.
---- @field paratroopers_range int The maximum range of a paradrop.
---- @field upkeep_food int The base amount of food consumed per turn in the home city.
---- @field upkeep_shields int The base amount of shields consumed per turn in the home city.
---- @field upkeep_gold int The base amount of gold consumed per turn.
---- @field happy_cost int The base amount of unhappiness caused in the home city.
---- @field city_slots int The number of unit maintenance slots taken up in the home city.
---- @field city_size int The initial number of citizens provided when founding a city.
+--- @field build_cost Number The number of shields required to make.
+--- @field pop_cost Number The number of citizens consumed to make.
+--- @field attack Number Base attack strength (0 = cannot attack.)
+--- @field defense Number Base defence strength (0 = cannot defend.)
+--- @field hp Number The maximum number of hitpoints.
+--- @field firepower Number Number of enemy hitpoints removed per successful round of combat.
+--- @field bombard_rate Number The number of rounds of bombardment.
+--- @field move_rate Number The base number of move fragments that can be employed each turn.
+--- @field max_veteran_level Number The maximum veteran level that units of this type can achieve.
+--- @field vision_radius_sq Number The base squared vision radius.
+--- @field transport_cap Number The number of passengers that can be held at once.
+--- @field fuel Number The maximum fuel that can be held.
+--- @field paratroopers_range Number The maximum range of a paradrop.
+--- @field upkeep_food Number The base amount of food consumed per turn in the home city.
+--- @field upkeep_shields Number The base amount of shields consumed per turn in the home city.
+--- @field upkeep_gold Number The base amount of gold consumed per turn.
+--- @field happy_cost Number The base amount of unhappiness caused in the home city.
+--- @field city_slots Number The number of unit maintenance slots taken up in the home city.
+--- @field city_size Number The initial number of citizens provided when founding a city.
 --- @field vision_layer_name string The layer at which this unit is visible. Can be "Main", "Stealth", or "Subsurface".
 Unit_Type = {}
 
@@ -508,7 +508,7 @@ function Unit_Type:name_translation() end
 function Unit_Type:can_exist_at_tile(tile) end
 
 --- 
---- @return int cost The total shield cost to build this unit type. Same as :lua:obj:`Unit_Type.build_cost`.
+--- @return Number cost The total shield cost to build this unit type. Same as :lua:obj:`Unit_Type.build_cost`.
 function Unit_Type:build_shield_cost()
   return self.build_cost
 end
@@ -516,10 +516,10 @@ end
 --- Represents a class of unit types.
 ---
 --- @class Unit_Class
---- @field id int The unique ID of the unit class.
---- @field min_speed int The minimum speed that units of this class can move at.
---- @field hp_loss_pct int The percentage of hitpoints lost each turn that the unit is not in a city or airbase.
---- @field non_native_def_pct int Defense power multiplier percentage when defending on non-native terrain (such as ship in harbour.)
+--- @field id Number The unique ID of the unit class.
+--- @field min_speed Number The minimum speed that units of this class can move at.
+--- @field hp_loss_pct Number The percentage of hitpoints lost each turn that the unit is not in a city or airbase.
+--- @field non_native_def_pct Number Defense power multiplier percentage when defending on non-native terrain (such as ship in harbour.)
 Unit_Class = {}
 
 --- 
@@ -538,7 +538,7 @@ function Unit_Class:has_flag(flag_name) end
 --- Represents a technological or cultural advance that a nation can research.
 ---
 --- @class Tech_Type
---- @field id int The unique ID of the advance.
+--- @field id Number The unique ID of the advance.
 Tech_Type = {}
 
 --- 
@@ -552,7 +552,7 @@ function Tech_Type:name_translation() end
 --- Represents a type of terrain that may appear on the map in this ruleset.
 ---
 --- @class Terrain
---- @field id int The unique ID of the terrain type.
+--- @field id Number The unique ID of the terrain type.
 Terrain = {}
 
 --- 
@@ -570,7 +570,7 @@ function Terrain:class_name() end
 --- Represents a type of disaster that can occur for a city in this ruleset.
 ---
 --- @class Disaster
---- @field id int The unique ID of the disaster type.
+--- @field id Number The unique ID of the disaster type.
 Disaster = {}
 
 --- 
@@ -584,7 +584,7 @@ function Disaster:name_translation() end
 --- Represents an achievement that a player can unlock in this ruleset.
 ---
 --- @class Achievement
---- @field id int The unique ID of the achievement.
+--- @field id Number The unique ID of the achievement.
 Achievement = {}
 
 --- 
@@ -598,7 +598,7 @@ function Achievement:name_translation() end
 --- Represents a type of action that a unit can perform in this ruleset. See :ref:`modding-ruleset-actions`
 ---
 --- @class Action
---- @field id int The unique ID of the action type.
+--- @field id Number The unique ID of the action type.
 Action = {}
 
 --- 
@@ -616,20 +616,36 @@ function Action:name_translation() end
 game = {}
 
 --- 
---- @return int turn The current turn number, starting from 1.
+--- @return Number turn The current turn number, starting from 1.
 function game.current_turn() end
 
 --- 
---- @return int year The current game year.
+--- @return Number year The current game year.
 function game.current_year() end
 
 --- 
---- @return int year-fragment The current game year fragment. E.g. 8 = August.
+--- @return Number year-fragment The current game year fragment. E.g. 8 = August.
 function game.current_fragment() end
 
 --- 
 --- @return string year-text Textual representation of current calendar time.
 function game.current_year_text() end
+
+---
+--- @return Number unix_timestamp The time the last turn change occurred.
+function game.last_turn_change() end
+
+---
+--- @return Number unix_timestamp The time the next turn change is expected.
+function game.next_turn_change() end
+
+---
+--- @return Number seconds The seconds since the last turn change.
+function game.seconds_since_turn_change() end
+
+---
+--- @return Number seconds The seconds until the next turn change.
+function game.seconds_to_turn_change() end
 
 --- 
 --- @return string ruleset-name Unique name of the ruleset.
@@ -648,7 +664,7 @@ function game.ruleset_name() end
 find = {}
 
 --- 
---- @param player_id_or_name int|string The unique ID or name of the player to search for.
+--- @param player_id_or_name Number|string The unique ID or name of the player to search for.
 --- @return Player player The player with the given ID or name if they exist, or nil.
 function find.player(player_id_or_name) end
 
@@ -663,7 +679,7 @@ function find.player(player_id_or_name) end
 function find.players_iterate() end
 
 --- 
---- @param team_id_or_name int|string The unique ID or name of the player to search for.
+--- @param team_id_or_name Number|string The unique ID or name of the player to search for.
 --- @return Team team The team with the given ID or name if they exist, or nil.
 function find.team(team_id_or_name) end
 
@@ -672,13 +688,13 @@ function find.teams_iterate() end
 
 --- 
 --- @param player Player The player who owns the city, or nil for any player
---- @param city_id int The unique ID for the city to search for
+--- @param city_id Number The unique ID for the city to search for
 --- @return City city The city if it exists and belongs to player, or nil
 function find.city(player, city_id) end
 
 --- 
 --- @param player Player The player who owns the unit, or nil for any player
---- @param unit_id int The unique ID for the unit to search for
+--- @param unit_id Number The unique ID for the unit to search for
 --- @return Unit unit The unit if it exists and belongs to player, or nil
 function find.unit(player, unit_id) end
 
@@ -693,13 +709,13 @@ function find.unit(player, unit_id) end
 function find.transport_unit(player, unit_type, tile) end
 
 --- Finds a tile based on natural coordinates.
---- @param nat_x int The natural x-coordinate.
---- @param nat_y int The natural y-coordinate.
+--- @param nat_x Number The natural x-coordinate.
+--- @param nat_y Number The natural y-coordinate.
 --- @return Tile tile The found tile.
 function find.tile(nat_x, nat_y) end
 
 --- Finds a tile by its index.
---- @param tindex int The index of the tile.
+--- @param tindex Number The index of the tile.
 --- @return Tile tile The found tile.
 function find.tile(tindex) end
 
@@ -714,7 +730,7 @@ function find.tiles_iterate() end
 function find.government(name) end
 
 --- Finds a government by its ID.
---- @param government_id int The ID of the government.
+--- @param government_id Number The ID of the government.
 --- @return Government government The found government.
 function find.government(government_id) end
 
@@ -729,7 +745,7 @@ function find.government_types_iterate() end
 function find.nation_type(name) end
 
 --- Finds a nation type by its ID.
---- @param nation_type_id int The ID of the nation type.
+--- @param nation_type_id Number The ID of the nation type.
 --- @return Nation_Type nation The found nation type.
 function find.nation_type(nation_type_id) end
 
@@ -748,7 +764,7 @@ function find.action(name) end
 --- .. attention::
 ---    An action's ID may change after saving and reloading the game.
 ---
---- @param action_type_id int The ID of the action.
+--- @param action_type_id Number The ID of the action.
 --- @return Action action The found action.
 function find.action(action_type_id) end
 
@@ -763,7 +779,7 @@ function find.action_types_iterate() end
 function find.building_type(name) end
 
 --- Finds a building type by its ID.
---- @param building_type_id int The ID of the building type.
+--- @param building_type_id Number The ID of the building type.
 --- @return Building_Type building The found building type.
 function find.building_type(building_type_id) end
 
@@ -778,7 +794,7 @@ function find.building_types_iterate() end
 function find.unit_type(name) end
 
 --- Finds a unit type by its ID.
---- @param unit_type_id int The ID of the unit type.
+--- @param unit_type_id Number The ID of the unit type.
 --- @return Unit_Type unit_type The found unit type.
 function find.unit_type(unit_type_id) end
 
@@ -791,7 +807,7 @@ function find.unit_types_iterate() end
 function find.unit_class(name) end
 
 --- Finds a unit class by its ID.
---- @param unit_class_id int The ID of the unit class.
+--- @param unit_class_id Number The ID of the unit class.
 --- @return Unit_Class unit-class The found unit class.
 function find.unit_class(unit_class_id) end
 
@@ -811,7 +827,7 @@ function find.role_unit_type(role_name, pplayer) end
 function find.tech_type(name) end
 
 --- Finds a tech type by its ID.
---- @param tech_type_id int The ID of the tech type.
+--- @param tech_type_id Number The ID of the tech type.
 --- @return Tech_Type tech The found tech type.
 function find.tech_type(tech_type_id) end
 
@@ -826,7 +842,7 @@ function find.technologies_iterate() end
 function find.terrain(name) end
 
 --- Finds a terrain by its ID.
---- @param terrain_id int The ID of the terrain.
+--- @param terrain_id Number The ID of the terrain.
 --- @return Terrain terrain The found terrain.
 function find.terrain(terrain_id) end
 
@@ -846,19 +862,19 @@ effects = {}
 
 --- Calculates a world effect bonus.
 --- @param effect_type Effect_Type The type of effect to calculate.
---- @return int value The value of the world effect.
+--- @return Number value The value of the world effect.
 function effects.world_bonus(effect_type) end
 
 --- Calculates a player effect bonus.
 --- @param pplayer Player The player to calculate the bonus for.
 --- @param effect_type Effect_Type The type of effect to calculate.
---- @return int value The value of the player effect.
+--- @return Number value The value of the player effect.
 function effects.player_bonus(pplayer, effect_type) end
 
 --- Calculates a city effect bonus.
 --- @param pcity City The city to calculate the bonus for.
 --- @param effect_type Effect_Type The type of effect to calculate.
---- @return int value The value of the city effect.
+--- @return Number value The value of the city effect.
 function effects.city_bonus(pcity, effect_type) end
 
 

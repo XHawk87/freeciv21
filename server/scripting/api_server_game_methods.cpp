@@ -12,16 +12,52 @@
 // utility
 #include "fcintl.h"
 
+// common
+#include "game.h"
+
 /* common/scriptcore */
 #include "luascript.h"
 
 // ai
 #include "aitraits.h" // ai_trait_get_value()
 
+// server
+#include "srv_main.h"
+
 /* server/scripting */
 #include "script_server.h"
 
 #include "api_server_game_methods.h"
+
+/**
+ * Return the number of seconds since the last turn change.
+ */
+double api_methods_game_seconds_since_turn_change(lua_State *L)
+{
+  LUASCRIPT_CHECK_STATE(L, 0);
+  LUASCRIPT_CHECK(L, current_turn_timeout() > 0,
+                  "The timeout is currently disabled.", 0);
+
+  LUASCRIPT_CHECK(L, server_state() == S_S_RUNNING,
+                  "The game is currently not running.", 0);
+  return timer_read_seconds(game.server.phase_timer)
+         + game.server.additional_phase_seconds;
+}
+
+/**
+ * Return the number of seconds until the next turn change.
+ */
+double api_methods_game_seconds_to_turn_change(lua_State *L)
+{
+  LUASCRIPT_CHECK_STATE(L, 0);
+  LUASCRIPT_CHECK(L, current_turn_timeout() > 0,
+                  "The timeout is currently disabled.", 0);
+  LUASCRIPT_CHECK(L, server_state() == S_S_RUNNING,
+                  "The game is currently not running.", 0);
+  return game.tinfo.seconds_to_phasedone
+         - timer_read_seconds(game.server.phase_timer)
+         - game.server.additional_phase_seconds;
+}
 
 /**
    Return the current value of an AI trait in force (base+mod)

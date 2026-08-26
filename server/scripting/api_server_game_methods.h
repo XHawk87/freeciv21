@@ -20,6 +20,9 @@
 /* Server-only methods added to the modules defined in
  * the common tolua_game.pkg. */
 
+double api_methods_game_seconds_since_turn_change(lua_State *L);
+double api_methods_game_seconds_to_turn_change(lua_State *L);
+
 int api_methods_player_trait(lua_State *L, Player *pplayer,
                              const char *tname);
 int api_methods_player_trait_base(lua_State *L, Player *pplayer,

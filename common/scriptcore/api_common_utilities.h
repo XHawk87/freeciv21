@@ -16,6 +16,11 @@ struct lua_State;
 
 int api_utilities_random(int min, int max);
 
+double api_utilities_time_now();
+const char *
+api_utilities_time_datetime_format_iso8601(double unix_timestamp);
+const char *api_utilities_time_duration_format_iso8601(double seconds);
+
 const Direction *api_utilities_str2dir(lua_State *L, const char *dir);
 const Direction *api_utilities_dir_ccw(lua_State *L, Direction dir);
 const Direction *api_utilities_dir_cw(lua_State *L, Direction dir);

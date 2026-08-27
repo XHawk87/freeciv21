@@ -26,7 +26,6 @@ extern "C" {
 #include "version.h"
 
 // Qt
-#include <QDateTime>
 #include <QLoggingCategory> // qCDebug, qCWarning, qCCritical
 #include <QtLogging>        // QtMsgType
 

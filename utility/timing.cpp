@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QTimeZone>
 #include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 Q_LOGGING_CATEGORY(timers_category, "freeciv.timers")
@@ -160,7 +161,7 @@ double seconds_since_epoch()
  */
 const char *to_iso8601_datetime(qint64 unix_timestamp)
 {
-  return QDateTime::fromSecsSinceEpoch(unix_timestamp, Qt::UTC)
+  return QDateTime::fromSecsSinceEpoch(unix_timestamp, QTimeZone::UTC)
       .toString(Qt::ISODate)
       .toUtf8()
       .constData();

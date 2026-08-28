@@ -331,6 +331,24 @@ To create a debug build retaining debug symbols compatible with :file:`gdb`:
 
   $ nix build .#freeciv21-debug --out-link ./build-nix-debug
 
+.. _compile-docker:
+
+Building with Docker
+====================
+
+If you cannot or do not wish to install the build dependencies directly on your
+system, it is also possible to build the project in a rootless docker container.
+See: https://docs.docker.com/engine/security/rootless/
+
+.. code-block:: sh
+
+   ./scripts/docker-build.sh # Builds and installs the project to the build-docker/ directory.
+   ./scripts/docker-build.sh build # As above.
+   ./scripts/docker-build.sh test # Runs the project tests and clang-tidy.
+   ./scripts/docker-build.sh tidy # Runs clang-tidy on all uncommitted files.
+   ./scripts/docker-build.sh tidy uncommitted # As above, and can take any clang-tidy arguments.
+   ./scripts/docker-build.sh tidy path/to/file.cpp|h # Runs clang-tidy on a specific file. Can take any clang-tidy arguments.
+
 Documentation Build Notes
 =========================
 

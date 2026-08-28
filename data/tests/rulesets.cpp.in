@@ -44,7 +44,7 @@ void test_rulesets::load()
 
   QProcess p;
   p.setProcessChannelMode(QProcess::ForwardedChannels);
-  p.start(SERVER_PATH, {QStringLiteral("-r"), name});
+  p.start("runuser", {"-u", "freeciv21", "--", SERVER_PATH, "-r", name});
   p.waitForStarted();
   p.write("quit\n");
   p.closeWriteChannel();

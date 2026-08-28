@@ -138,6 +138,13 @@ Some helpful tips:
 Start with the header (:file:`.h`), resolve any complaints and then move to the :file:`.cpp`. Multiple runs
 of :file:`clang-tidy` can be useful.
 
+If you cannot build with :file:`cmake` on your system, there is a script to build
+using a rootless docker container. See :ref:`Building with Docker <compile-docker>`.
+
+.. code-block:: sh
+
+    ./scripts/docker-build.sh tidy path/to/cpp-or-h/file 
+
 2. Do not include the generated :file:`specenum_gen.h` file. The network protocol uses named ``enums``
    heavily. The named enum will be in another header. Use code search to find if needed.
 

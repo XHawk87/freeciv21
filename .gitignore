@@ -50,7 +50,7 @@ build.ninja
 /*.sh
 
 # Build directories
-build*
+/build*
 .flatpak-builder
 
 # Nix build artifacts

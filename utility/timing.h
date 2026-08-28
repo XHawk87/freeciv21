@@ -5,6 +5,7 @@
 
 // Qt
 #include <QLoggingCategory>
+#include <QtTypes>
 
 // Timing logging is has to be filtered out to compare logs when needed.
 Q_DECLARE_LOGGING_CATEGORY(timers_category)

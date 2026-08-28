@@ -17,6 +17,7 @@ extern "C" {
 #include "rand.h"
 #include "shared.h"
 #include "support.h"
+#include "timing.h"
 
 // common
 #include "fc_types.h"

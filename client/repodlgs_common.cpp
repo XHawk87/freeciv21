@@ -120,8 +120,9 @@ void get_economy_report_units_data(struct unit_entry *entries,
   {
     cost = utype_upkeep_cost(unittype, client.conn.playing, O_GOLD);
 
+    // Econ view only shows units that have a cost. If the base upkeep is
+    // zero we skip the iterator completely.
     if (cost == 0) {
-      // Short-circuit all of the following checks.
       continue;
     }
 
@@ -130,13 +131,15 @@ void get_economy_report_units_data(struct unit_entry *entries,
 
     unit_list_iterate(client.conn.playing->units, punit)
     {
-      if (unit_type_get(punit) == unittype && punit->upkeep[O_GOLD] > 0) {
+      // As we move into the iterator, we need to ensure the unit matches the
+      // unittype for accurate counts and that the unit has some gold upkeep.
+      // We also need to check if the unit is not homeless or the game
+      // setting is set for homeless gold upkeep.
+      if ((!unit_is_homeless(punit) || game.server.homeless_gold_upkeep)
+          && (unit_type_get(punit) == unittype
+              && punit->upkeep[O_GOLD] > 0)) {
         count++;
-        // get upkeep if the unit isn't homeless or we have the server
-        // setting set
-        if (!unit_is_homeless(punit) || game.server.homeless_gold_upkeep) {
-          partial_cost += punit->upkeep[O_GOLD];
-        }
+        partial_cost += punit->upkeep[O_GOLD];
       }
     }
     unit_list_iterate_end;

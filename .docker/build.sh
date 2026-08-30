@@ -20,7 +20,7 @@ case "$cmd" in
     esac
   ;;
   'test')
-    cmake . --preset clang
+    cmake . --preset clang -DALWAYS_ROOT=YES
     cmake --build build-clang
     cmake --build build-clang --target test
     ./.docker/clang-tidy-uncommitted-changes.sh \

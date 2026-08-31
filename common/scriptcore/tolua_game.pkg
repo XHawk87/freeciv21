@@ -171,11 +171,11 @@ $[
 -- game module implementation.
 
 function game.next_turn_change()
-  return time.now() + game.seconds_to_turn_change()
+  return os.time() + game.seconds_to_turn_change()
 end
 
 function game.last_turn_change()
-  return time.now() - game.seconds_since_turn_change()
+  return os.time() - game.seconds_since_turn_change()
 end
 
 $]

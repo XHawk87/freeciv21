@@ -107,5 +107,12 @@ tolua = {
   type=tolua.type,
 }
 
+-- Override global 'os' module with a reduced version
+os = {
+  time=os.time,
+  date=os.date,
+  difftime=os.difftime
+}
+
 -- Hide all private methods
 methods_private = nil

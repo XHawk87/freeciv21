@@ -8,10 +8,8 @@
 #include "log.h"
 
 // Qt
-#include <QDateTime>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
-#include <QTimeZone>
 #include <QtLogging> // qDebug, qWarning, qCritical, etc
 
 Q_LOGGING_CATEGORY(timers_category, "freeciv.timers")
@@ -143,68 +141,4 @@ double timer_read_seconds(civtimer *t)
     t->state = TIMER_STARTED;
   }
   return t->sec;
-}
-
-/**
- * Return a unix timestamp in fractional seconds since the epoch to
- * millisecond precision.
- */
-double seconds_since_epoch()
-{
-  return QDateTime::currentDateTimeUtc().toMSecsSinceEpoch()
-         / MILLISECONDS_IN_A_SECOND;
-}
-
-/**
- * Convert a unix timestamp in seconds since the epoch to an ISO-8601
- * date-time string. E.g. 2026-08-08T10:44:37Z
- */
-const char *to_iso8601_datetime(qint64 unix_timestamp)
-{
-  return QDateTime::fromSecsSinceEpoch(unix_timestamp, QTimeZone::UTC)
-      .toString(Qt::ISODate)
-      .toUtf8()
-      .constData();
-}
-
-/**
- * Convert a duration in seconds to an ISO-8601 duration string. E.g. P3DT4H
- */
-const char *to_iso8601_duration(qint64 seconds)
-{
-  // Seriously Qt, why no QTimeSpan?
-  thread_local QByteArray s;
-  const bool neg = seconds < 0;
-  quint64 sec = neg ? quint64(-(seconds + 1)) + 1 : quint64(seconds);
-
-  qint64 days = sec / DAY_IN_SECONDS;
-  sec %= DAY_IN_SECONDS;
-  qint64 hours = sec / HOUR_IN_SECONDS;
-  sec %= HOUR_IN_SECONDS;
-  qint64 mins = sec / MINUTE_IN_SECONDS;
-  sec %= MINUTE_IN_SECONDS;
-
-  s.clear();
-  if (neg) {
-    s += '-';
-  }
-  s += 'P';
-  if (days) {
-    s += QByteArray::number(days) + 'D';
-  }
-
-  if (hours || mins || sec || !days) {
-    s += 'T';
-    if (hours) {
-      s += QByteArray::number(hours) + 'H';
-    }
-    if (mins) {
-      s += QByteArray::number(mins) + 'M';
-    }
-    if (sec || (!hours && !mins)) {
-      s += QByteArray::number(sec) + 'S';
-    }
-  }
-
-  return s.constData();
 }

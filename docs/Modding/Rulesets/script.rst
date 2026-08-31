@@ -244,12 +244,12 @@ Utilities
 
 .. lua:autoobject:: random
 .. lua:autoobject:: fc_version
-.. lua:autoobject:: players_iterate
-.. lua:autoobject:: whole_map_iterate
 
-.. lua:autoobject:: time
+.. lua:autoobject:: log
    :members:
    :recursive:
+.. lua:autoobject:: players_iterate
+.. lua:autoobject:: whole_map_iterate
 
 Debugging
 ^^^^^^^^^
@@ -259,8 +259,16 @@ Debugging
 .. lua:autoobject:: signal.list
 .. lua:autoobject:: fc_version
 
-* :lua:obj:`_VERSION`
-* :lua:func:`assert`
+:lua:obj:`_VERSION`
+
+A global variable (not a function) that holds a string containing the running
+Lua version. The current value of this variable is "Lua 5.4". 
+
+:lua:func:`assert`
+
+Raises an error if the value of its argument v is false (i.e., nil or false);
+otherwise, returns all its arguments. In case of error, message is the error
+object; when absent, it defaults to "assertion failed!" 
 
 .. _script-unit-loss-reasons:
 
@@ -406,21 +414,205 @@ document Lua builtins here, but just to mention a selection of the useful parts.
 Lua Functions
 ^^^^^^^^^^^^^
 
-* :lua:func:`pcall`
-* :lua:func:`pairs`
-* :lua:func:`ipairs`
+:lua:func:`pcall`
+
+Calls the function f with the given arguments in protected mode. This means that
+any error inside f is not propagated; instead, pcall catches the error and
+returns a status code. Its first result is the status code (a boolean), which is
+true if the call succeeds without errors. In such case, pcall also returns all
+results from the call, after this first result. In case of any error, pcall
+returns false plus the error object. Note that errors caught by pcall do not
+call a message handler.
+
+:lua:func:`pairs` 
+
+If t has a metamethod __pairs, calls it with t as argument and returns the
+first three results from the call.
+
+Otherwise, returns three values: the next function, the table t, and nil, so
+that the construction
+
+.. code-block:: lua
+
+   for k,v in pairs(t) do body end
+
+will iterate over all key–value pairs of table t.
+
+See function next for the caveats of modifying the table during its traversal. 
+
+:lua:func:`ipairs`
+
+Returns three values (an iterator function, the table t, and 0) so that the
+construction
+
+.. code-block:: lua
+
+   for i,v in ipairs(t) do body end
+
+will iterate over the key–value pairs (1,t[1]), (2,t[2]), ..., up to the first
+absent index.
 
 Lua Globals
 ^^^^^^^^^^^
 
-* :lua:obj:`_G`
+:lua:obj:`_G` 
+
+A global variable (not a function) that holds the global environment (see 
+`§2.2 <https://www.lua.org/manual/5.4/manual.html#2.2>`_). Lua itself does not
+use this variable; changing its value does not affect any environment, nor vice
+versa.
 
 .. _script-lua-builtin-modules:
 
 Lua Modules
 ^^^^^^^^^^^
 
-* :lua:obj:`math`
-* `string <https://www.lua.org/manual/5.4/manual.html#pdf-string>`_
-* `table <https://www.lua.org/manual/5.4/manual.html#pdf-table>`_
+.. lua:autoobject:: os
+   :members: time, date, difftime
+   :recursive:
+
+.. lua:autoobject:: math
+   :members: abs, ceil, floor, max, min
+   :recursive:
+
+.. lua:table:: string
+
+   `The String Library <https://www.lua.org/pil/20.html>`_
+   
+   This is a subset of useful functions. There are more available in the 
+   `manual <https://www.lua.org/manual/5.4/manual.html#pdf-string>`_.
+   
+   .. lua:function:: find(s: string, pattern: string, init: Number, plain: boolean): (start: Number, end: Number, groups: string...)
+
+      Looks for the first match of pattern (see 
+      `§6.4.1 <https://www.lua.org/manual/5.4/manual.html#6.4.1>`_) in the 
+      string s. If it finds a match, then find returns the indices of s where
+      this occurrence starts and ends; otherwise, it returns fail. A third,
+      optional numeric argument init specifies where to start the search; its
+      default value is 1 and can be negative. A true as a fourth, optional
+      argument plain turns off the pattern matching facilities, so the
+      function does a plain "find substring" operation, with no characters in
+      pattern being considered magic.
+
+      If the pattern has captures, then in a successful match the captured
+      values are also returned, after the two indices.
+
+      See `string.find <https://www.lua.org/manual/5.4/manual.html#pdf-string.find>`_
+
+   .. lua:function:: gmatch(s: string, pattern: string, init: Number): (matches: iterator)
+
+      Returns an iterator function that, each time it is called, returns the
+      next captures from pattern (see 
+      `§6.4.1 <https://www.lua.org/manual/5.4/manual.html#6.4.1>`_) over the
+      string s. If pattern specifies no captures, then the whole match is
+      produced in each call. A third, optional numeric argument init specifies
+      where to start the search; its default value is 1 and can be negative.
+
+      See `string.gmatch <https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch>`_
+
+   .. lua:function:: match(s: string, pattern: string, init: Number): (match: string)
+
+      Looks for the first match of the pattern (see 
+      `§6.4.1 <https://www.lua.org/manual/5.4/manual.html#6.4.1>`_) in the
+      string s. If it finds one, then match returns the captures from the
+      pattern; otherwise it returns fail. If pattern specifies no captures,
+      then the whole match is returned. A third, optional numeric argument init
+      specifies where to start the search; its default value is 1 and can be
+      negative. 
+
+      See `string.match <https://www.lua.org/manual/5.4/manual.html#pdf-string.match>`_
+
+   .. lua:function:: format(format: string, args...: any): (formatted: string)
+ 
+      Returns a formatted version of its variable number of arguments following
+      the description given in its first argument, which must be a string. The
+      format string follows the same rules as the ISO C function sprintf. The
+      only differences are that the conversion specifiers and modifiers F, n,
+      *, h, L, and l are not supported and that there is an extra specifier, q.
+      Both width and precision, when present, are limited to two digits. 
+
+      See `string.format <https://www.lua.org/manual/5.4/manual.html#pdf-string.format>`_
+    
+   .. lua:function:: len(s: string): (length: Number)
+
+      Receives a string and returns its length. The empty string "" has length
+      0. Embedded zeros are counted, so "a\000bc\000" has length 5. 
+
+      See `string.len <https://www.lua.org/manual/5.4/manual.html#pdf-string.len>`_
+
+   .. lua:function:: lower(s: string): (converted: string)
+
+      Receives a string and returns a copy of this string with all uppercase
+      letters changed to lowercase. All other characters are left unchanged.
+      The definition of what an uppercase letter is depends on the current
+      locale. 
+
+      See `string.lower <https://www.lua.org/manual/5.4/manual.html#pdf-string.lower>`_
+
+   .. lua:function:: upper(s: string): (converted: string)
+   
+      Receives a string and returns a copy of this string with all lowercase
+      letters changed to uppercase. All other characters are left unchanged.
+      The definition of what a lowercase letter is depends on the current
+      locale. 
+
+      See `string.upper <https://www.lua.org/manual/5.4/manual.html#pdf-string.upper>`_
+
+.. lua:table:: table
+
+   `The Table Library <https://www.lua.org/pil/19.html>`_
+   `Array Size <https://www.lua.org/pil/19.1.html>`_
+   
+   This is a subset of useful functions. There are more available in the 
+   `manual <https://www.lua.org/manual/5.4/manual.html#pdf-table>`_.
+
+   .. lua:function:: concat(list: table, sep: string|Number, i: Number, j: Number): (joined: string)
+
+      Given a list where all elements are strings or numbers, returns the
+      string list[i]..sep..list[i+1] ··· sep..list[j]. The default value for
+      sep is the empty string, the default for i is 1, and the default for j is
+      #list. If i is greater than j, returns the empty string. 
+
+      `table.concat <https://www.lua.org/manual/5.4/manual.html#pdf-table.concat>`_
+
+   .. lua:function:: insert(list: table, [pos: Number,] value: any)
+
+      Inserts element value at position pos in list, shifting up the elements
+      list[pos], list[pos+1], ···, list[#list]. The default value for pos is
+      #list+1, so that a call table.insert(t,x) inserts x at the end of the
+      list t.
+
+      See `Insert and Remove <https://www.lua.org/pil/19.2.html>`_
+      `table.insert <https://www.lua.org/manual/5.4/manual.html#pdf-table.insert>`_
+
+   .. lua:function:: remove(list: table [, pos: Number]): (removed: any)
+
+      Removes from list the element at position pos, returning the value of the
+      removed element. When pos is an integer between 1 and #list, it shifts
+      down the elements list[pos+1], list[pos+2], ···, list[#list] and erases
+      element list[#list]; The index pos can also be 0 when #list is 0, or
+      #list + 1.
+
+      See `Insert and Remove <https://www.lua.org/pil/19.2.html>`_
+      `table.remove <https://www.lua.org/manual/5.4/manual.html#pdf-table.remove>`_
+
+   .. lua:function:: sort(list: table, comp: function)
+
+      Sorts the list elements in a given order, in-place, from list[1] to
+      list[#list]. If comp is given, then it must be a function that receives
+      two list elements and returns true when the first element must come
+      before the second in the final order, so that, after the sort, i <= j
+      implies not comp(list[j],list[i]). If comp is not given, then the
+      standard Lua operator < is used instead.
+
+      The comp function must define a consistent order; more formally, the
+      function must define a strict weak order. (A weak order is similar to a
+      total order, but it can equate different elements for comparison
+      purposes.)
+
+      The sort algorithm is not stable: Different elements considered equal by
+      the given order may have their relative positions changed by the sort.
+
+      See `Sorting <https://www.lua.org/pil/19.3.html>`_
+      `table.sort <https://www.lua.org/manual/5.4/manual.html#pdf-table.sort>`_
 

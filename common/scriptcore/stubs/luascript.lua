@@ -48,23 +48,21 @@ function random(min, max) end
 --- @return string version The current version of the project.
 function fc_version() end
 
---- Time-related utilities
+--- `The Operating System Library <https://www.lua.org/pil/22.html>`_
+---
+--- Only these `time-related functions <https://www.lua.org/pil/22.1.html>`_ 
+--- from the `manual <https://www.lua.org/manual/5.4/manual.html#pdf-os>`_ 
+--- are available.
 ---
 --- !doctype table
---- @class time
-time = {}
+--- @class os
+os = {}
 
---- Get the current system time.
---- @return Number Fractional seconds since the epoch.
-function time.now() end
-
---- Get the timestamp in ISO-8601 format. E.g. "2026-08-08T10:44:37Z"
---- @param unix_timestamp Number Seconds since the epoch.
---- @return string Timestamp in ISO-8601 format.
-function time.to_iso8601_datetime(unix_timestamp) end
-
---- Get the duration in ISO-8601 format. E.g. "P3DT4H"
---- @param unix_timestamp Number Seconds since the epoch.
---- @return string Timestamp in ISO-8601 format.
-function time.to_iso8601_duration(seconds) end
-
+--- `The Mathematical Library <https://www.lua.org/pil/18.html>`_
+---
+--- This is a subset of useful functions. There are more available in the 
+--- `manual <https://www.lua.org/manual/5.4/manual.html#pdf-math>`_.
+---
+--- !doctype table
+--- @class math
+math = {}

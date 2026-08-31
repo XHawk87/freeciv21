@@ -94,7 +94,7 @@ static const char *luascript_unsafe_symbols_permissive[] = {
  */
 #if LUA_VERSION_NUM >= 503 && LUA_VERSION_NUM <= 505
 static luaL_Reg luascript_lualibs_secure[] = {
-    // Using default libraries excluding: package, io, os, and bit32
+    // Using default libraries excluding: package, io, and bit32
     {"_G", luaopen_base},
     {LUA_COLIBNAME, luaopen_coroutine},
     {LUA_TABLIBNAME, luaopen_table},
@@ -102,6 +102,8 @@ static luaL_Reg luascript_lualibs_secure[] = {
     {LUA_UTF8LIBNAME, luaopen_utf8},
     {LUA_MATHLIBNAME, luaopen_math},
     {LUA_DBLIBNAME, luaopen_debug},
+    {LUA_OSLIBNAME, luaopen_os}, // See tolua_common_z.lua where this is
+                                 // limited to just the time functions
     {nullptr, nullptr}};
 #else // LUA_VERSION_NUM
 #error "Unsupported lua version"
@@ -403,16 +405,6 @@ static void luascript_common_a_register(sol::state_view state)
       "DEBUG",   LOG_DEBUG);
   // clang-format on
   state["log"] = log;
-
-  // time module
-  // clang-format off
-  sol::table time = state.create_table_with(
-      "now", api_utilities_time_now,
-      "to_iso8601_datetime", api_utilities_time_datetime_format_iso8601,
-      "to_iso8601_duration", api_utilities_time_duration_format_iso8601
-  );
-  // clang-format on
-  state["time"] = time;
 
   // Global functions
   state["random"] = api_utilities_random;
